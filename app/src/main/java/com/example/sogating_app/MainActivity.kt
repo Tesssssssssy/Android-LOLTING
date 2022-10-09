@@ -123,12 +123,12 @@ class MainActivity : AppCompatActivity() {
 
         })
 
-
+        // 카드 스텍 어뎁터에 연결하는 부분
         cardStackAdapter = CardStackAdapter(baseContext, usersDataList)
         cardStackView.layoutManager = manager
         cardStackView.adapter  = cardStackAdapter
 
-       // getUserDataList()
+   
         getMyUserData() //나의 정보를 가져오는 함수 호출.
     }
 
