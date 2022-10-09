@@ -64,7 +64,7 @@ class JoinActivity : AppCompatActivity() {
             getAction.launch("image/*")
         }
 
-
+        //회원가입 버튼
         val joinBtn = findViewById<Button>(R.id.ButtonArea)
         joinBtn.setOnClickListener {
             val email = findViewById<TextInputEditText>(R.id.emailArea)
