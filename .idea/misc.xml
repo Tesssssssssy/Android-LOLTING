@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/wpdla/AndroidStudioProjects/Sogating_App/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.38229166666666664" />
+        <entry key="..\:/Users/wpdla/AndroidStudioProjects/Sogating_App/app/src/main/res/layout/activity_intro.xml" value="0.25" />
+        <entry key="..\:/Users/wpdla/AndroidStudioProjects/Sogating_App/app/src/main/res/layout/activity_join.xml" value="0.22" />
+        <entry key="..\:/Users/wpdla/AndroidStudioProjects/Sogating_App/app/src/main/res/layout/activity_list_view_adapter.xml" value="0.20104166666666667" />
+        <entry key="..\:/Users/wpdla/AndroidStudioProjects/Sogating_App/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Users/wpdla/AndroidStudioProjects/Sogating_App/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/wpdla/AndroidStudioProjects/Sogating_App/app/src/main/res/layout/activity_my_like_list.xml" value="0.20104166666666667" />
+        <entry key="..\:/Users/wpdla/AndroidStudioProjects/Sogating_App/app/src/main/res/layout/activity_my_msg.xml" value="0.2046875" />
+        <entry key="..\:/Users/wpdla/AndroidStudioProjects/Sogating_App/app/src/main/res/layout/activity_my_page.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/wpdla/AndroidStudioProjects/Sogating_App/app/src/main/res/layout/activity_setting.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/wpdla/AndroidStudioProjects/Sogating_App/app/src/main/res/layout/activity_splash.xml" value="0.33" />
+        <entry key="..\:/Users/wpdla/AndroidStudioProjects/Sogating_App/app/src/main/res/layout/custom_dialog.xml" value="0.17806484295845998" />
+        <entry key="..\:/Users/wpdla/AndroidStudioProjects/Sogating_App/app/src/main/res/layout/item_card.xml" value="0.2" />
+        <entry key="..\:/Users/wpdla/AndroidStudioProjects/Sogating_App/app/src/main/res/layout/list_view_item.xml" value="0.20104166666666667" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

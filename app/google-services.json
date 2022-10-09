@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "237785040431",
+    "project_id": "sogating-test",
+    "storage_bucket": "sogating-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:237785040431:android:5d75be48fbaf186b51e8da",
+        "android_client_info": {
+          "package_name": "com.example.sogating_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "237785040431-4i1t7a0t82e9ob0t70ukri4ae5bmdr5r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVIa7zG2YQQ3F4lO2jxE2DceRygfcZGzU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "237785040431-4i1t7a0t82e9ob0t70ukri4ae5bmdr5r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
