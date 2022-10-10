@@ -3,6 +3,9 @@
 ### 프로젝트 일정 관리 [Notion]
 <img src = "https://user-images.githubusercontent.com/63548551/194883235-12a4cbbc-b648-4dff-805e-b811da58bc82.jpg" >
 
+### 프로젝트 일정 관리 링크
+https://www.notion.so/OB-c0f6a99b583f45e987eaa139bf335a3a
+
 ### 프론트엔드 개발 [안드로이드 Kotlin]
 <img src = "https://user-images.githubusercontent.com/63548551/194883519-2ae466f3-f821-4fb6-b8da-e4ad9cd210dc.png" >
 
