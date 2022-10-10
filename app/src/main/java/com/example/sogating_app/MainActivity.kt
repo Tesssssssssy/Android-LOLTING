@@ -128,7 +128,7 @@ class MainActivity : AppCompatActivity() {
         cardStackView.layoutManager = manager
         cardStackView.adapter  = cardStackAdapter
 
-   
+
         getMyUserData() //나의 정보를 가져오는 함수 호출.
     }
 
