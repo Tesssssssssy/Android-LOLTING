@@ -39,6 +39,7 @@ class JoinActivity : AppCompatActivity() {
     private var city = ""
     private var age = ""
     private var uid = ""
+    private var position = ""
 
     lateinit var profileImage: ImageView
 
@@ -86,7 +87,7 @@ class JoinActivity : AppCompatActivity() {
             gender = findViewById<TextInputEditText>(R.id.genderArea).text.toString()
             city = findViewById<TextInputEditText>(R.id.cityArea).text.toString()
             age = findViewById<TextInputEditText>(R.id.ageArea).text.toString()
-
+            position = findViewById<TextInputEditText>(R.id.gamepositionArea).text.toString()
 
 
             // 회원가입시 Firebase에 유저의 정보들을 저장한다.
@@ -121,6 +122,7 @@ class JoinActivity : AppCompatActivity() {
                                     age,
                                     gender,
                                     city,
+                                    position,
                                     token
                                 )
 

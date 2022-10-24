@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/girlfriend"
+    android:background="@drawable/purple_background2"
     android:orientation="vertical"
     tools:context=".auth.LoginActivity">
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="15dp"
         android:background="@color/white">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -19,7 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="email"
-
             />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -27,14 +26,14 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="15dp"
         android:background="@color/white">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/pwdArea"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="pwd"
+            android:hint="password"
             android:inputType="textPassword"
 
             />
@@ -45,8 +44,12 @@
         android:id="@+id/loginbtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@color/mainColor"
-        android:text="로그인" />
+        android:layout_margin="15dp"
+        android:background="@drawable/rounded_button"
+        android:fontFamily="@font/gangwon_teacher"
+        android:backgroundTint="@color/skyblue"
+        android:text="로그인"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
 
 </LinearLayout>

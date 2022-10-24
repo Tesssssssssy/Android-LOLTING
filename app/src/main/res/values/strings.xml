@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Sogating_App</string>
+    <string name="app_name_2">kotlin-kakao-login</string>
+
+    <!-- Kakao KEY설정[AndroidManifest.xml에도 설정]-->
+    <!-- Kakao-init에서 사용 -->
+    <string name="kakao_app_key">75166cd9699520344e3e1a61b4c7dfe8</string>
+    <string name="kakao_app_key2">kakao75166cd9699520344e3e1a61b4c7dfe8</string>
+    <string name="firebase_web_client_id">237785040431-4i1t7a0t82e9ob0t70ukri4ae5bmdr5r.apps.googleusercontent.com</string>
+
+
+
 </resources>

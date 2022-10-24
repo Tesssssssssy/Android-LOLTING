@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@drawable/purple_background2"
     tools:context=".auth.JoinActivity">
 
     <ScrollView
@@ -19,15 +19,16 @@
             <ImageView
                 android:id="@+id/imageArea"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="60dp"
                 android:contentDescription="@null"
-                android:src="@drawable/user" />
+                android:src="@drawable/profile" />
 
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+                android:layout_margin="10dp"
+                android:background="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/emailArea"
@@ -42,13 +43,14 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 app:counterEnabled="true"
-                app:counterMaxLength="10">
+                app:counterMaxLength="10"
+                android:background="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/pwdArea"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="pwd" />
+                    android:hint="password" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -57,34 +59,22 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 app:counterEnabled="true"
-                app:counterMaxLength="10">
+                app:counterMaxLength="10"
+                android:background="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/pwdCheckArea"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="pwdCheck" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/nicknameArea"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="닉네임" />
+                    android:hint="password check" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+                android:layout_margin="10dp"
+                android:background="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/genderArea"
@@ -97,20 +87,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/cityArea"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="지역" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+                android:layout_margin="10dp"
+                android:background="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ageArea"
@@ -120,12 +98,59 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/cityArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="거주지" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nicknameArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="lolting nickname" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/gamepositionArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="게임 내 선호 포지션(라인)" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
             <Button
                 android:id="@+id/ButtonArea"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:background="@color/mainColor"
+                android:textColor="@color/white"
+                android:fontFamily="@font/gangwon_teacher"
+                android:textSize="30sp"
+                android:background="@drawable/rounded_button"
+                android:backgroundTint="@color/skyblue"
                 android:text="회원가입" />
         </LinearLayout>
     </ScrollView>

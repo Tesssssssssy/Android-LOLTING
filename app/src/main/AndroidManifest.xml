@@ -12,6 +12,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Sogating_App">
+
+        <activity
+            android:name=".auth.SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".Message.MyMsgActivity"
             android:exported="true" />
@@ -44,9 +55,6 @@
             android:exported="true" />
         <activity
             android:name=".auth.IntroActivity"
-            android:exported="true" />
-        <activity
-            android:name=".auth.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -54,9 +62,33 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Kakao 로그인 -->
+        <activity
+            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth" -->
+                <!-- scheme-example: "kakao{NATIVE_APP_KEY}" -->
+                <data
+                    android:host="oauth"
+                    android:scheme="@string/kakao_app_key2" />
+
+            </intent-filter>
+        </activity>
+
+
         <activity
             android:name=".MainActivity"
             android:exported="true" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

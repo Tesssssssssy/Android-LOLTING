@@ -31,4 +31,26 @@
         android:layout_height="wrap_content"
         android:text="LOGOUT" />
 
+    <Button
+        android:id="@+id/google_logout_Btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="google logout"
+        android:backgroundTint="@color/purple_700"
+        android:textColor="@color/white"/>
+
+
+    <Button
+        android:id="@+id/btn_start_kakao_unlink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#f9e000"
+        android:text="카카오 연결끊기"
+        android:textColor="@color/black"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_start_kakao_logout" />
+
 </LinearLayout>
