@@ -52,12 +52,14 @@ class JoinActivity : AppCompatActivity() {
 
         // 이미지를 클릭하면 핸드폰에 저장되어있는 이미지들을 불러옴.
         // registerForActivityResult()를 통해서 핸드폰에 저장되어있는 저장소에 접근한다.
-        val getAction = registerForActivityResult(
-            ActivityResultContracts.GetContent(),
-            ActivityResultCallback { uri ->
-                profileImage.setImageURI(uri)
-            }
-        )
+        // 회원가입딴에는 이미지 변경이 불가하도록 변경, 자동으로 기본이미지로 일단 저장
+        // 후에 마이페이지에서 이미지 바꾸고 사람인지 아닌지 인공지능으로 검증
+//        val getAction = registerForActivityResult(
+//            ActivityResultContracts.GetContent(),
+//            ActivityResultCallback { uri ->
+//                profileImage.setImageURI(uri)
+//            }
+//        )
 
         // getAction.launch() 메소드를 통해서 저장된 이미지를 변경.
         profileImage.setOnClickListener {
