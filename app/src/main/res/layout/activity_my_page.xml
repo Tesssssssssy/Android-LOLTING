@@ -7,6 +7,11 @@
     android:orientation="vertical"
     tools:context=".setting.MyPageActivity">
 
+    <include
+        layout="@layout/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <ImageView
         android:id="@+id/myImage"
         android:layout_width="100dp"
@@ -62,6 +67,25 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="gender"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+    <Button
+        android:id="@+id/changebtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="변경"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/logoutbtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Logout"
         android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold" />

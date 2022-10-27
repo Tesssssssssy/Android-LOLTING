@@ -1,4 +1,4 @@
-package com.example.sogating_app
+package com.example.sogating_app.MAIN
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -8,37 +8,33 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.bumptech.glide.Glide
-import com.example.sogating_app.auth.IntroActivity
+import com.example.sogating_app.R
 import com.example.sogating_app.auth.UserDataModel
 import com.example.sogating_app.setting.MyPageActivity
-import com.example.sogating_app.setting.SettingActivity
 import com.example.sogating_app.slider.CardStackAdapter
 import com.example.sogating_app.utils.FirebaseAuthUtils
 import com.example.sogating_app.utils.FirebaseRef
 import com.example.sogating_app.utils.MyInfo
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager
 import com.yuyakaido.android.cardstackview.CardStackListener
 import com.yuyakaido.android.cardstackview.CardStackView
 import com.yuyakaido.android.cardstackview.Direction
 
-class MainActivity : AppCompatActivity() {
+class MatchingActivity : AppCompatActivity() {
 
     lateinit var cardStackAdapter: CardStackAdapter
     lateinit var manager : CardStackLayoutManager
 
-    private val TAG = "MainActivity"
+    private val TAG = "MatchingActivity"
 
     // 접속한 유저의 정보를 저장할 리스트 정의
     private val usersDataList = mutableListOf<UserDataModel>()
@@ -51,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_matching)
 
         // 좋아요.를 통해서 매칭하는 방법.
         // 나는 동환, 내가 좋아하는 여자는 채영이다.
@@ -61,21 +57,11 @@ class MainActivity : AppCompatActivity() {
         // 나와 다른 성별의 유저를 받아오는 법
         // 1. 일단 나의 성별을 알고 전체 유저중에서 나와 다른 성별을 가져온다.
 
-        // 로그 아웃 기능추가
-        val setting = findViewById<ImageView>(R.id.settingIcon)
-        setting.setOnClickListener {
-            /*val auth = Firebase.auth
-            auth.signOut() // 로그아웃
-
-            val intent = Intent(this, IntroActivity::class.java)
-            startActivity(intent)*/
-
-            //
-
-            val intent = Intent(this, SettingActivity::class.java)
-            startActivity(intent)
-
-        }
+        // 메인액티비티로 가기
+        val toolbar: Toolbar = findViewById(R.id.toolbar) // toolBar를 통해 App Bar 생성
+        setSupportActionBar(toolbar) // 툴바 적용
+        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
+        getSupportActionBar()?.setTitle("")
 
 
         val cardStackView = findViewById<CardStackView>(R.id.cardStackView)
@@ -100,7 +86,7 @@ class MainActivity : AppCompatActivity() {
 
                 if(userCount == usersDataList.count()){
                     getUserDataList(currentUserGender)
-                    Toast.makeText(this@MainActivity,"유저를 새롭게 받아옵니다.",Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@MatchingActivity,"유저를 새롭게 받아옵니다.",Toast.LENGTH_LONG).show()
                 }
             }
 
@@ -132,6 +118,20 @@ class MainActivity : AppCompatActivity() {
         getMyUserData() //나의 정보를 가져오는 함수 호출.
     }
 
+    //뒤로가기 시 메인액티비티 다시 실행
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        when (id) {
+            android.R.id.home -> {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     // 나의 정보를 가져오는 함수
     private fun getMyUserData(){
         val postListener = object : ValueEventListener {
@@ -144,10 +144,6 @@ class MainActivity : AppCompatActivity() {
                 currentUserGender = data?.gender.toString()
                 MyInfo.myNickName = data?.nickname.toString()
                 getUserDataList(currentUserGender)
-
-
-
-
 
             }
 
@@ -214,7 +210,7 @@ class MainActivity : AppCompatActivity() {
 
                     val likeUserKey  = dataModel.key.toString()
                     if(likeUserKey.equals(uid)){
-                        Toast.makeText(this@MainActivity,"매칭 완료",Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@MatchingActivity,"매칭 완료",Toast.LENGTH_LONG).show()
                         createNotificationChannel() // 매칭이 완료되었을 떄 Notification 알림
                         sendNotification()
                     }
@@ -260,5 +256,4 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
 }

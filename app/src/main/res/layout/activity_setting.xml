@@ -7,23 +7,6 @@
     android:orientation="vertical"
     tools:context=".setting.SettingActivity">
 
-    <Button
-        android:id="@+id/myPageBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="myPage" />
-
-    <Button
-        android:id="@+id/myLikeListBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="MyLikeList" />
-    <Button
-        android:id="@+id/myMessage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="쪽지함" />
-
 
     <Button
         android:id="@+id/logoutBtn"

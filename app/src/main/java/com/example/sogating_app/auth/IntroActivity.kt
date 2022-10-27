@@ -1,6 +1,5 @@
 package com.example.sogating_app.auth
 
-import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,24 +7,16 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-import com.example.sogating_app.MainActivity
+import com.example.sogating_app.MAIN.MatchingActivity
 import kotlinx.android.synthetic.main.activity_intro.*
 import com.example.sogating_app.R
 import com.example.sogating_app.databinding.ActivityIntroBinding
-import com.example.sogating_app.setting.MyPageActivity
-import com.example.sogating_app.setting.SettingActivity
-import com.google.android.gms.actions.NoteIntents.EXTRA_NAME
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.ktx.Firebase
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.ClientError
@@ -239,7 +230,7 @@ class IntroActivity : AppCompatActivity() {
                 } else if (token != null) {
                     Log.i("KAKAO_LOGIN", "카카오톡으로 로그인 성공 ${token.accessToken}")
 
-                    val intent = Intent(this, MainActivity::class.java)
+                    val intent = Intent(this, MatchingActivity::class.java)
                     startActivity(intent)
                 }
             }

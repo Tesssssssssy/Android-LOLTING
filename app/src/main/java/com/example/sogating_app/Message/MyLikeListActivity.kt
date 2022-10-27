@@ -1,14 +1,18 @@
 package com.example.sogating_app.Message
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.Toolbar
+import com.example.sogating_app.MAIN.MainActivity
 import com.example.sogating_app.Message.fcm.NotiAPI
 import com.example.sogating_app.Message.fcm.NotiModel
 import com.example.sogating_app.Message.fcm.PushNotification
@@ -49,6 +53,11 @@ class MyLikeListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_like_list)
+
+        val toolbar: Toolbar = findViewById(R.id.toolbar) // toolBar를 통해 App Bar 생성
+        setSupportActionBar(toolbar) // 툴바 적용
+        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
+        getSupportActionBar()?.setTitle("")
 
         // ListViewAdapter 연결하는 부분
         val userListView = findViewById<ListView>(R.id.userListView)
@@ -222,6 +231,20 @@ class MyLikeListActivity : AppCompatActivity() {
         }
 
         // Firebase 에 메시지를 받는 사람 uid 밑에 message, 누가 보냈는지 uid를 저장한다.
+    }
+
+    //뒤로가기 시 메인액티비티 다시 실행
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        when (id) {
+            android.R.id.home -> {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }

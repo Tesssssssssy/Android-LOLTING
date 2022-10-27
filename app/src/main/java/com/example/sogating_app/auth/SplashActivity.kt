@@ -4,14 +4,10 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
-import com.example.sogating_app.MainActivity
+import com.example.sogating_app.MAIN.MainActivity
 import com.example.sogating_app.R
 import com.example.sogating_app.utils.FirebaseAuthUtils
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.messaging.FirebaseMessaging
-import javax.xml.datatype.DatatypeConstants.DURATION
 
 class SplashActivity : AppCompatActivity() {
     private val TAG = "SplashActivity"

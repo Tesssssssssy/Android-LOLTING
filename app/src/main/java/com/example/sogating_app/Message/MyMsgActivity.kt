@@ -1,9 +1,13 @@
 package com.example.sogating_app.Message
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.ListView
+import androidx.appcompat.widget.Toolbar
+import com.example.sogating_app.MAIN.MainActivity
 import com.example.sogating_app.R
 import com.example.sogating_app.auth.UserDataModel
 import com.example.sogating_app.utils.FirebaseAuthUtils
@@ -21,6 +25,11 @@ class MyMsgActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_msg)
+
+        val toolbar: Toolbar = findViewById(R.id.toolbar) // toolBar를 통해 App Bar 생성
+        setSupportActionBar(toolbar) // 툴바 적용
+        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
+        getSupportActionBar()?.setTitle("")
 
         val listView = findViewById<ListView>(R.id.msgListView)
         listViewAdapter = MsgAdapter(this,msgList)
@@ -53,5 +62,19 @@ class MyMsgActivity : AppCompatActivity() {
         }
         // 데이터가 어디에 정의되어 있는 냐???
         FirebaseRef.userMsgRef.child(FirebaseAuthUtils.getUid()).addValueEventListener(postListener)
+    }
+
+    //뒤로가기 시 메인액티비티 다시 실행
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        when (id) {
+            android.R.id.home -> {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

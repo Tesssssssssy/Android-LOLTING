@@ -12,7 +12,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.sogating_app.MainActivity
+import com.example.sogating_app.MAIN.MainActivity
 
 import com.example.sogating_app.R
 import com.example.sogating_app.utils.FirebaseRef
@@ -21,7 +21,6 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.ktx.database
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
@@ -136,9 +135,6 @@ class JoinActivity : AppCompatActivity() {
 
 
                         })
-
-
-
 
                         // 회원가입시 메인 액티비티로 이동.
                         val intent = Intent(this, MainActivity::class.java)
