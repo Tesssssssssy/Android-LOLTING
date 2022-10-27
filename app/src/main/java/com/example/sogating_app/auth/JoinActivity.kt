@@ -54,6 +54,7 @@ class JoinActivity : AppCompatActivity() {
         // registerForActivityResult()를 통해서 핸드폰에 저장되어있는 저장소에 접근한다.
         // 회원가입딴에는 이미지 변경이 불가하도록 변경, 자동으로 기본이미지로 일단 저장
         // 후에 마이페이지에서 이미지 바꾸고 사람인지 아닌지 인공지능으로 검증
+
 //        val getAction = registerForActivityResult(
 //            ActivityResultContracts.GetContent(),
 //            ActivityResultCallback { uri ->
@@ -62,9 +63,9 @@ class JoinActivity : AppCompatActivity() {
 //        )
 
         // getAction.launch() 메소드를 통해서 저장된 이미지를 변경.
-        profileImage.setOnClickListener {
-            getAction.launch("image/*")
-        }
+//        profileImage.setOnClickListener {
+//            getAction.launch("image/*")
+//        }
 
         //회원가입 버튼
         val joinBtn = findViewById<Button>(R.id.ButtonArea)
