@@ -29,9 +29,6 @@
             android:name=".auth.JoinActivity"
             android:exported="true" />
         <activity
-            android:name=".auth.JoinDataActivity"
-            android:exported="true" />
-        <activity
             android:name=".auth.IntroActivity"
             android:exported="true" /> <!-- firebase service -->
         <service
