@@ -13,6 +13,13 @@
         android:layout_height="wrap_content" />
 
     <ImageView
+        android:id = "@+id/back_button_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/backbuttonimg"
+        android:layout_gravity = "left"/>
+
+    <ImageView
         android:id="@+id/myImage"
         android:layout_width="100dp"
         android:layout_height="100dp"

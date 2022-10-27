@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.widget.ImageView
 import android.widget.ListView
 import androidx.appcompat.widget.Toolbar
 import com.example.sogating_app.MAIN.MainActivity
+import com.example.sogating_app.MAIN.MatchingActivity
 import com.example.sogating_app.R
 import com.example.sogating_app.auth.UserDataModel
 import com.example.sogating_app.utils.FirebaseAuthUtils
@@ -15,6 +17,7 @@ import com.example.sogating_app.utils.FirebaseRef
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_my_msg.*
 
 class MyMsgActivity : AppCompatActivity() {
 
@@ -25,11 +28,13 @@ class MyMsgActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_msg)
-
-        val toolbar: Toolbar = findViewById(R.id.toolbar) // toolBar를 통해 App Bar 생성
-        setSupportActionBar(toolbar) // 툴바 적용
-        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
-        getSupportActionBar()?.setTitle("")
+        
+        //뒤로가기 버튼 누르면 메인액티비티로 감
+        var back_button = findViewById<ImageView>(R.id.back_button_img)
+        back_button.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
 
         val listView = findViewById<ListView>(R.id.msgListView)
         listViewAdapter = MsgAdapter(this,msgList)

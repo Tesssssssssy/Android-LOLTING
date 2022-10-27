@@ -29,18 +29,18 @@
             android:name=".auth.JoinActivity"
             android:exported="true" />
         <activity
+            android:name=".auth.JoinDataActivity"
+            android:exported="true" />
+        <activity
             android:name=".auth.IntroActivity"
-            android:exported="true"/>
-        <!--firebase service -->
+            android:exported="true" /> <!-- firebase service -->
         <service
             android:name=".Message.fcm.FirebaseService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </service>
-
-        <!-- main and navigation -->
+        </service> <!-- main and navigation -->
         <activity
             android:name=".MAIN.MainActivity"
             android:exported="true" />
@@ -51,7 +51,7 @@
         <activity
             android:name=".setting.PartnerActivity"
             android:exported="true"
-            android:parentActivityName=".MAIN.MainActivity"/>
+            android:parentActivityName=".MAIN.MainActivity" />
         <activity
             android:name=".Message.MyLikeListActivity"
             android:exported="true"
@@ -67,8 +67,7 @@
         <activity
             android:name=".setting.SettingActivity"
             android:exported="true"
-            android:parentActivityName=".setting.MyPageActivity"/>
-        <!-- Kakao 로그인 -->
+            android:parentActivityName=".setting.MyPageActivity" /> <!-- Kakao 로그인 -->
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">

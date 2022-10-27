@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ListView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import com.example.sogating_app.MAIN.MainActivity
@@ -54,10 +51,12 @@ class MyLikeListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_like_list)
 
-        val toolbar: Toolbar = findViewById(R.id.toolbar) // toolBar를 통해 App Bar 생성
-        setSupportActionBar(toolbar) // 툴바 적용
-        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
-        getSupportActionBar()?.setTitle("")
+        //뒤로가기 버튼 누르면 메인액티비티로 감
+        var back_button = findViewById<ImageView>(R.id.back_button_img)
+        back_button.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
 
         // ListViewAdapter 연결하는 부분
         val userListView = findViewById<ListView>(R.id.userListView)

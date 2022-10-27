@@ -12,6 +12,12 @@
         layout="@layout/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <ImageView
+        android:id = "@+id/back_button_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/backbuttonimg"
+        android:layout_gravity = "left"/>
 
     <ListView
         android:id = "@+id/msgListView"

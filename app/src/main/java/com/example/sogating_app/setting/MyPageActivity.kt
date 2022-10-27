@@ -38,10 +38,12 @@ class MyPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_page)
 
-        val toolbar: Toolbar = findViewById(R.id.toolbar) // toolBar를 통해 App Bar 생성
-        setSupportActionBar(toolbar) // 툴바 적용
-        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
-        getSupportActionBar()?.setTitle("")
+        //뒤로가기 버튼 누르면 메인액티비티로 감
+        var back_button = findViewById<ImageView>(R.id.back_button_img)
+        back_button.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
 
         getMyData()
 
@@ -62,6 +64,7 @@ class MyPageActivity : AppCompatActivity() {
 
         // 변경버튼
         changebtn.setOnClickListener{
+            changeUserData(uid)
             uploadImage(uid)
             Toast.makeText(this, "변경이 완료 되었습니다", Toast.LENGTH_SHORT).show()
         }
@@ -71,6 +74,11 @@ class MyPageActivity : AppCompatActivity() {
             val intent = Intent(this, SettingActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    //유저 데이터 변경
+    private fun changeUserData(uid: String) {
+
     }
 
     // 이미지 재저장
@@ -114,6 +122,7 @@ class MyPageActivity : AppCompatActivity() {
                 val data = dataSnapshot.getValue(UserDataModel::class.java)
 
                 myUid.text = data!!.uid
+
                 myNickname.text = data!!.nickname
                 myAge.text = data!!.age
                 myCity.text = data!!.city
@@ -127,9 +136,7 @@ class MyPageActivity : AppCompatActivity() {
                             .load(task.result)
                             .into(myImage)
                     }
-
                 })
-
 
             }
 

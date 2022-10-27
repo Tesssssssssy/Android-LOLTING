@@ -5,11 +5,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".setting.PartnerActivity">
+    tools:context=".setting.PartnerActivity"
+    android:orientation="vertical">
 
     <include
         layout="@layout/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id = "@+id/back_button_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/backbuttonimg"
+        android:layout_gravity = "left"/>
 
 </LinearLayout>

@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.NotificationCompat
@@ -57,11 +58,12 @@ class MatchingActivity : AppCompatActivity() {
         // 나와 다른 성별의 유저를 받아오는 법
         // 1. 일단 나의 성별을 알고 전체 유저중에서 나와 다른 성별을 가져온다.
 
-        // 메인액티비티로 가기
-        val toolbar: Toolbar = findViewById(R.id.toolbar) // toolBar를 통해 App Bar 생성
-        setSupportActionBar(toolbar) // 툴바 적용
-        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
-        getSupportActionBar()?.setTitle("")
+        //뒤로가기 버튼 누르면 메인액티비티로 감
+        var back_button = findViewById<ImageView>(R.id.back_button_img)
+        back_button.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
 
 
         val cardStackView = findViewById<CardStackView>(R.id.cardStackView)
@@ -116,20 +118,6 @@ class MatchingActivity : AppCompatActivity() {
 
 
         getMyUserData() //나의 정보를 가져오는 함수 호출.
-    }
-
-    //뒤로가기 시 메인액티비티 다시 실행
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-        when (id) {
-            android.R.id.home -> {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     // 나의 정보를 가져오는 함수

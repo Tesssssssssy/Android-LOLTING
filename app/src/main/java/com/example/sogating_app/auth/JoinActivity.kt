@@ -28,7 +28,6 @@ import java.io.ByteArrayOutputStream
 
 class JoinActivity : AppCompatActivity() {
 
-
     private val TAG = "JoinActivity"
     private lateinit var auth: FirebaseAuth
     // Initialize Firebase Auth
