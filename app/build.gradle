@@ -65,6 +65,9 @@ dependencies {
 
     implementation "com.kakao.sdk:v2-user:2.11.0"
 
+    //riot api
+    implementation("com.github.kimcore:riot.kt:1.0")
+
 }
 task wrapper(type: Wrapper) {
     gradleVersion = '7.0'

@@ -13,7 +13,7 @@
         <ImageView
             android:id="@+id/profileImageArea"
             android:layout_width="match_parent"
-            android:layout_height="500dp" />
+            android:layout_height="300dp" />
 
         <TextView
             android:id="@+id/itemName"
@@ -41,6 +41,36 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:text="City"
+            android:textColor="#050000"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/itemLOLNickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="LOLnickname"
+            android:textColor="#050000"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/itemLOLPostion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="LOLposition"
+            android:textColor="#050000"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/itemLOLTier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="LOLtier"
             android:textColor="#050000"
             android:textSize="30dp"
             android:textStyle="bold" />

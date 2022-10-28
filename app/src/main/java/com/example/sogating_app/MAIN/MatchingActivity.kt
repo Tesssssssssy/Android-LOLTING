@@ -43,6 +43,9 @@ class MatchingActivity : AppCompatActivity() {
     private var userCount = 0
 
     private lateinit var currentUserGender : String
+    private lateinit var currentUserLOLnickname: String
+    private lateinit var currentUserLOLtier: String
+    private lateinit var currentUserAGE: String
 
     private val uid = FirebaseAuthUtils.getUid()
 
@@ -120,7 +123,14 @@ class MatchingActivity : AppCompatActivity() {
         getMyUserData() //나의 정보를 가져오는 함수 호출.
     }
 
-    // 나의 정보를 가져오는 함수
+    /* 매칭 알고리즘 함수 
+    * 1. 나와 다른 성별 남 -> 여, 여 -> 남
+    * 2. firebase realtime database 내에서 lolname 이 "롤닉네임" 이 아니어야 함 즉 롤닉네임이 등록 되어 있어야함
+    * 3. 나이 +- 10살 (추후 구현 예정)
+    * 4. 티어 차이 +- 1티어 브론즈라면 브론즈, 실버, 골드 만 매칭 (추후 구현 예정)
+    * */
+    
+    // 나의 유저 데이터 가져오기
     private fun getMyUserData(){
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -130,6 +140,10 @@ class MatchingActivity : AppCompatActivity() {
 
 
                 currentUserGender = data?.gender.toString()
+                currentUserAGE = data?.age.toString()
+                currentUserLOLnickname = data?.lolname.toString()
+                currentUserLOLtier = data?.loltier.toString()
+
                 MyInfo.myNickName = data?.nickname.toString()
                 getUserDataList(currentUserGender)
 
@@ -155,9 +169,12 @@ class MatchingActivity : AppCompatActivity() {
 
                     val user = dataModel.getValue(UserDataModel::class.java)
 
-                    //유저의 정보를 추가하기전 현재 유저의 성별과 일치하는 지 확인.!\
-                    if(user!!.gender.toString().equals(currentUserGender)){
-
+                    // 매칭 알고리즘!
+                    //1. 나와 다른 성별 남 -> 여, 여 -> 남
+                    //2. firebase realtime database 내에서 lolname 이 "롤닉네임" 이 아니어야 함 즉 롤닉네임이 등록 되어 있어야함
+                    //3. 나이 +- 10살 (추후 변경 예정)
+                    //4. 티어 차이 +- 1티어 브론즈라면 브론즈, 실버, 골드 만 매칭 (추후 구현 예정)
+                    if(user!!.gender.toString().equals(currentUserGender) || user!!.lolname == "롤닉네임" ){
 
                     }else{
                         usersDataList.add(user!!) // 유저의 정보 리스트에 추가.

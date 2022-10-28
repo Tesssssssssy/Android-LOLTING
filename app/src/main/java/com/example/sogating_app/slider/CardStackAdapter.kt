@@ -39,6 +39,11 @@ class CardStackAdapter(val context: Context, val items: MutableList<UserDataMode
         val age = itemView.findViewById<TextView>(R.id.itemAge)
         val city = itemView.findViewById<TextView>(R.id.itemCity)
 
+        val lolnickname = itemView.findViewById<TextView>(R.id.itemLOLNickname)
+        val lolposition = itemView.findViewById<TextView>(R.id.itemLOLPostion)
+        val loltier = itemView.findViewById<TextView>(R.id.itemLOLTier)
+
+
         // 카드의 정보에 연결하는 binding 연결 함수.
         fun binding(data : UserDataModel){
 
@@ -55,6 +60,9 @@ class CardStackAdapter(val context: Context, val items: MutableList<UserDataMode
             nickname.text = data.nickname
             age.text = data.age
             city.text = data.city
+            lolnickname.text = data.lolname
+            lolposition.text = data.position
+            loltier.text = data.loltier
         }
     }
 }

@@ -85,7 +85,15 @@ class JoinActivity : AppCompatActivity() {
 
             // 닉네임 , 성별 , 지역 , 나이 , UID 정보를 저장한다.
             nickname = findViewById<TextInputEditText>(R.id.nicknameArea).text.toString()
-            gender = findViewById<TextInputEditText>(R.id.genderArea).text.toString()
+
+            // 성별의 경우 남, 여 로만 저장
+            val genderbuff = findViewById<TextInputEditText>(R.id.genderArea).text.toString()
+            if(genderbuff == "M" || genderbuff == "m"){
+                gender = "남"
+            }else if(genderbuff == "F" || genderbuff == "f"){
+                gender = "여"
+            }
+            //도시, 나이, 롤포지션 저장
             city = findViewById<TextInputEditText>(R.id.cityArea).text.toString()
             age = findViewById<TextInputEditText>(R.id.ageArea).text.toString()
             position = findViewById<TextInputEditText>(R.id.gamepositionArea).text.toString()
@@ -124,7 +132,9 @@ class JoinActivity : AppCompatActivity() {
                                     gender,
                                     city,
                                     position,
-                                    token
+                                    token,
+                                    "롤닉네임",
+                                    "롤티어"
                                 )
 
 
