@@ -21,8 +21,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:text="Name"
+            android:fontFamily="@font/nexonlight"
             android:textColor="#050000"
-            android:textSize="30dp"
+            android:textSize="40dp"
             android:textStyle="bold" />
 
         <TextView
@@ -30,9 +31,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:fontFamily="@font/nexonlight"
             android:text="Age"
             android:textColor="#050000"
-            android:textSize="30dp"
+            android:textSize="40dp"
             android:textStyle="bold" />
 
         <TextView
@@ -40,39 +42,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:fontFamily="@font/nexonlight"
             android:text="City"
             android:textColor="#050000"
-            android:textSize="30dp"
+            android:textSize="40dp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/itemLOLNickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nexonlight"
             android:layout_margin="5dp"
             android:text="LOLnickname"
             android:textColor="#050000"
-            android:textSize="30dp"
+            android:textSize="40dp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/itemLOLPostion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nexonlight"
             android:layout_margin="5dp"
             android:text="LOLposition"
             android:textColor="#050000"
-            android:textSize="30dp"
+            android:textSize="40dp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/itemLOLTier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nexonlight"
             android:layout_margin="5dp"
             android:text="LOLtier"
             android:textColor="#050000"
-            android:textSize="30dp"
+            android:textSize="40dp"
             android:textStyle="bold" />
 
     </LinearLayout>
