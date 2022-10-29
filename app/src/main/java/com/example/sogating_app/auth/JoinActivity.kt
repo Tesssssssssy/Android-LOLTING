@@ -90,7 +90,7 @@ class JoinActivity : AppCompatActivity() {
             val genderbuff = findViewById<TextInputEditText>(R.id.genderArea).text.toString()
             if(genderbuff == "M" || genderbuff == "m"){
                 gender = "남"
-            }else if(genderbuff == "F" || genderbuff == "f"){
+            }else if(genderbuff == "W" || genderbuff == "w"){
                 gender = "여"
             }
             //도시, 나이, 롤포지션 저장
