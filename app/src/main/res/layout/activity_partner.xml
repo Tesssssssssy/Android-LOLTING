@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:fontFamily="@font/nexonlight"
-        android:text="친구와의 티어차"
+        android:text="친구와의 티어 차이"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:fontFamily="@font/nexonlight"
-        android:text="친구포지션"
+        android:text="친구의 포지션"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:fontFamily="@font/nexonlight"
-        android:text="친구와의 나이차"
+        android:text="친구와의 나이 차이"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:fontFamily="@font/nexonlight"
-        android:text="이성과함께"
+        android:text="이성친구와 함께"
         android:background = "@drawable/backgradientpurple"
         android:textColor="@color/white"
         android:textSize="20sp"
@@ -82,7 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:fontFamily="@font/nexonlight"
-        android:text="이성친구와의 티어차"
+        android:text="이성친구와의 티어 차이"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -93,7 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:fontFamily="@font/nexonlight"
-        android:text="이성친구포지션"
+        android:text="이성친구의 포지션"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -104,7 +104,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:fontFamily="@font/nexonlight"
-        android:text="이성과의 나이차"
+        android:text="이성과의 나이 차이"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />

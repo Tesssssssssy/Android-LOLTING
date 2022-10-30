@@ -65,6 +65,11 @@ dependencies {
 
     implementation "com.kakao.sdk:v2-user:2.11.0"
 
+    //viewpager2
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+    implementation 'me.relex:circleindicator:2.1.4'
+    implementation("com.tbuonomo:dotsindicator:4.3")
+
     //riot api
     implementation("com.github.kimcore:riot.kt:1.0")
 

@@ -46,10 +46,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:background="@drawable/rounded_button"
-        android:fontFamily="@font/gangwon_teacher"
+        android:textStyle="bold"
+        android:fontFamily="@font/nexonlight"
         android:backgroundTint="@color/skyblue"
         android:text="로그인"
         android:textColor="@color/white"
-        android:textSize="30sp" />
+        android:textSize="25sp" />
 
 </LinearLayout>

@@ -147,8 +147,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:textColor="@color/white"
-                android:fontFamily="@font/gangwon_teacher"
-                android:textSize="30sp"
+                android:fontFamily="@font/nexonlight"
+                android:textSize="25sp"
+                android:textStyle="bold"
                 android:background="@drawable/rounded_button"
                 android:backgroundTint="@color/skyblue"
                 android:text="회원가입" />

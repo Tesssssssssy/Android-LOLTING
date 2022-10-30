@@ -10,4 +10,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="skyblue">#7A39EF</color>
     <color name="deeppurple">#2B0D40</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="yellow2">#FFC107</color>
+    <color name="tutorial">#9206AA</color>
+
 </resources>
