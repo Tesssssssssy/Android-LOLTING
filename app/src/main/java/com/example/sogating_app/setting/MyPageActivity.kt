@@ -76,7 +76,6 @@ class MyPageActivity : AppCompatActivity() {
             ActivityResultContracts.GetContent(),
             ActivityResultCallback { uri ->
                 myImage.setImageURI(uri)
-                scanImg()
             }
         )
         // getAction.launch() 메소드를 통해서 저장된 이미지를 변경.
@@ -87,8 +86,9 @@ class MyPageActivity : AppCompatActivity() {
 
         // 이미지 변경버튼
         changebtn.setOnClickListener {
-            uploadImage(uid)
-            Toast.makeText(this, "변경이 완료 되었습니다", Toast.LENGTH_SHORT).show()
+            scanImg()
+//            uploadImage(uid)
+//            Toast.makeText(this, "변경이 완료 되었습니다", Toast.LENGTH_SHORT).show()
         }
 
         /* 롤 아이디 등록 및 티어체크 버튼 */
@@ -209,7 +209,8 @@ class MyPageActivity : AppCompatActivity() {
             override fun onResponse(call: Call<ResponseData>, response: Response<ResponseData>) {
                 Log.d("ResponseData: ",response.body().toString())
                 if (response.body().toString().equals("ResponseData(result=1)")){
-                    Toast.makeText(getApplicationContext(), "얼굴인식 완료",Toast.LENGTH_SHORT).show();
+                    uploadImage(uid)
+                    Toast.makeText(getApplicationContext(), "얼굴인식 완료, 이미지 변경이 완료 되었습니다.",Toast.LENGTH_SHORT).show();
                 }else if(response.body().toString().equals("ResponseData(result=2)")){
                     Toast.makeText(getApplicationContext(), "얼굴인식 실패 혼자만 있는 사진을 선택해 주세요",Toast.LENGTH_SHORT).show();
                 }
