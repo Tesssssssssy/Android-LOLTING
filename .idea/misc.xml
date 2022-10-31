@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/dorns/AndroidStudioProjects/LOL_TING_FRONT/app/src/main/res/layout/activity_intro.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/dorns/AndroidStudioProjects/LOL_TING_FRONT/app/src/main/res/layout/activity_join.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/dorns/AndroidStudioProjects/LOL_TING_FRONT/app/src/main/res/layout/activity_login.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/dorns/AndroidStudioProjects/LOL_TING_FRONT/app/src/main/res/layout/activity_my_page.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/dorns/AndroidStudioProjects/LOL_TING_FRONT/app/src/main/res/layout/activity_splash.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/dorns/AndroidStudioProjects/LOL_TING_FRONT_END/app/src/main/res/drawable/backgradient.xml" value="0.2725" />
         <entry key="..\:/Users/dorns/AndroidStudioProjects/LOL_TING_FRONT_END/app/src/main/res/drawable/ic_baseline_dehaze_24.xml" value="0.2575" />
         <entry key="..\:/Users/dorns/AndroidStudioProjects/LOL_TING_FRONT_END/app/src/main/res/layout/activity_cardstack.xml" value="0.36614583333333334" />
