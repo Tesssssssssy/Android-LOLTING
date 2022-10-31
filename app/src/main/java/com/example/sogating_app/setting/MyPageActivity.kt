@@ -16,6 +16,7 @@ import androidx.appcompat.widget.Toolbar
 import com.bumptech.glide.Glide
 import com.example.sogating_app.MAIN.MainActivity
 import com.example.sogating_app.R
+import com.example.sogating_app.auth.IntroActivity
 import com.example.sogating_app.auth.UserDataModel
 import com.example.sogating_app.utils.FirebaseAuthUtils
 import com.example.sogating_app.utils.FirebaseRef
@@ -26,6 +27,7 @@ import com.github.kimcore.riot.errors.RiotException
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -117,7 +119,11 @@ class MyPageActivity : AppCompatActivity() {
 
         // 로그아웃버튼 클릭
         logoutbtn.setOnClickListener {
-            val intent = Intent(this, SettingActivity::class.java)
+            val auth = Firebase.auth
+            auth.signOut()
+            finish()
+
+            val intent = Intent(this, IntroActivity::class.java)
             startActivity(intent)
         }
     }
