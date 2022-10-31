@@ -11,7 +11,8 @@
         android:label="롤팅"
         android:roundIcon="@mipmap/loltingicon"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Sogating_App">
+        android:theme="@style/Theme.Sogating_App"
+        android:usesCleartextTraffic="true">>
         <!-- auth and login -->
         <activity
             android:name=".auth.SplashActivity"
