@@ -9,6 +9,13 @@ https://www.notion.so/OB-c0f6a99b583f45e987eaa139bf335a3a
 ### 프론트엔드 개발 [안드로이드 Kotlin]
 <img src = "https://user-images.githubusercontent.com/63548551/194883519-2ae466f3-f821-4fb6-b8da-e4ad9cd210dc.png" >
 
+### 개발환경 
+- IDE : Android
+- Kotlin Version : 
+- Android Sdk Version : 
+
+  
+      
 ### LOL_TING_FRONT 프로토타입 [Figma]
 <img src = "https://user-images.githubusercontent.com/63548551/194869532-d7ca1998-e506-483a-a1ae-be1ffb3976cf.png" >
 
