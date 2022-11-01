@@ -1,7 +1,7 @@
 # LOL_TING_FRONT-END
-## 프론트엔드 Repository
-
-
+## 프론트엔드 Repository  
+  
+  
 ### 프론트엔드 개발 [안드로이드 Kotlin]
 <img src = "https://user-images.githubusercontent.com/63548551/194883519-2ae466f3-f821-4fb6-b8da-e4ad9cd210dc.png" >
 
