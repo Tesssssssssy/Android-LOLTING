@@ -142,7 +142,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     /* ExpandableListView 설정 */
     private fun setExpandableList() {
         val parentList = mutableListOf("내정보","매칭하러가기","내가좋아요한 사람목록", "메시지함")
-        val childList = mutableListOf(mutableListOf("내정보","원하는 상대 정보"))
+        val childList = mutableListOf(
+            mutableListOf("내정보","원하는 상대 정보"),
+            mutableListOf(),
+            mutableListOf(),
+            mutableListOf()
+        )
 
         val expandableAdapter = ExpandableListAdapter(this, parentList,childList)
         el_menu.setAdapter(expandableAdapter)
