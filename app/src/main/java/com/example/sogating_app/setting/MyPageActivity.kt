@@ -95,7 +95,7 @@ class MyPageActivity : AppCompatActivity() {
 
         /* RIOT API setting */
         //임시 api key setting 24시간마다 갱신해야됨!!!
-        RiotAPI.setApiKey("RGAPI-3f86d30b-2c4e-4cd7-81ea-592bfabbde78")
+        RiotAPI.setApiKey("RGAPI-45828416-1843-40c5-8ecd-c27366c40c72")
         // optional, defaults to KR, ASIA
         RiotAPI.setDefaultPlatform(Platform.KR)
         RiotAPI.setDefaultRegion(Region.ASIA)
