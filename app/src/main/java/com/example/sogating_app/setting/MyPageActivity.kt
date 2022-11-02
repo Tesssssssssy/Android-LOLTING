@@ -19,6 +19,7 @@ import com.example.sogating_app.MAIN.MainActivity
 import com.example.sogating_app.Message.img.ImgApi
 import com.example.sogating_app.Message.img.ResponseData
 import com.example.sogating_app.R
+import com.example.sogating_app.audio.VoiceChatActivity
 import com.example.sogating_app.auth.IntroActivity
 import com.example.sogating_app.auth.UserDataModel
 import com.example.sogating_app.utils.FirebaseAuthUtils
@@ -68,6 +69,18 @@ class MyPageActivity : AppCompatActivity() {
 
         getMyData()
 
+
+        //음성 채팅 시작
+        voiceChatBtn.setOnClickListener{
+            val intent = Intent(this, VoiceChatActivity::class.java)
+
+//            자신의 uid,상대방 uid 필요
+//            intent.putExtra("my_uid", my_uid)
+//            intnet.putExtra("another_uid",another_uid)
+            startActivity(intent)
+        }
+
+
         /* 이미지 클릭해서 교체하기 */
         myImage = findViewById(R.id.myImage)
         // 이미지를 클릭하면 핸드폰에 저장되어있는 이미지들을 불러옴.
@@ -78,11 +91,17 @@ class MyPageActivity : AppCompatActivity() {
                 myImage.setImageURI(uri)
             }
         )
+
+
+
+
         // getAction.launch() 메소드를 통해서 저장된 이미지를 변경.
         myImage.setOnClickListener {
             getAction.launch("image/*")
 
         }
+
+
 
         // 이미지 변경버튼
         changebtn.setOnClickListener {
@@ -95,7 +114,7 @@ class MyPageActivity : AppCompatActivity() {
 
         /* RIOT API setting */
         //임시 api key setting 24시간마다 갱신해야됨!!!
-        RiotAPI.setApiKey("RGAPI-3f86d30b-2c4e-4cd7-81ea-592bfabbde78")
+        RiotAPI.setApiKey("RGAPI-45828416-1843-40c5-8ecd-c27366c40c72")
         // optional, defaults to KR, ASIA
         RiotAPI.setDefaultPlatform(Platform.KR)
         RiotAPI.setDefaultRegion(Region.ASIA)
