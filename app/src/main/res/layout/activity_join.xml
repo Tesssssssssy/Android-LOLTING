@@ -16,18 +16,22 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imageArea"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:contentDescription="@null"
-                android:src="@drawable/profile" />
+                android:layout_height="wrap_content"
+                android:text=" * 회원가입"
+                android:fontFamily="@font/jalnan"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:layout_marginTop="10dp"/>
 
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="18dp"
                 android:background="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -41,7 +45,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
                 app:counterEnabled="true"
                 app:counterMaxLength="10"
                 android:background="@color/white">
@@ -57,7 +63,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
                 app:counterEnabled="true"
                 app:counterMaxLength="10"
                 android:background="@color/white">
@@ -73,7 +81,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
                 android:background="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -87,7 +97,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
                 android:background="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -101,7 +113,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
                 android:background="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -115,7 +129,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
                 android:background="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -129,7 +145,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
                 android:background="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -143,15 +161,17 @@
 
             <Button
                 android:id="@+id/ButtonArea"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
                 android:textColor="@color/white"
-                android:fontFamily="@font/nexonlight"
+                android:fontFamily="@font/jalnan"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 android:background="@drawable/rounded_button"
-                android:backgroundTint="@color/skyblue"
+                android:backgroundTint="@color/tutorial"
                 android:text="회원가입" />
         </LinearLayout>
     </ScrollView>

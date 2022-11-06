@@ -39,15 +39,13 @@ class JoinActivity : AppCompatActivity() {
     private var uid = ""
     private var position = ""
 
-    lateinit var profileImage: ImageView
+//    lateinit var profileImage: ImageView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_join)
         auth = Firebase.auth
-
-        profileImage = findViewById(R.id.imageArea)
 
         // 이미지를 클릭하면 핸드폰에 저장되어있는 이미지들을 불러옴.
         // registerForActivityResult()를 통해서 핸드폰에 저장되어있는 저장소에 접근한다.
@@ -142,7 +140,7 @@ class JoinActivity : AppCompatActivity() {
                                 FirebaseRef.userInfoRef.child(uid).setValue(userModel)
 
                                 // 회원가입시 Firebase storage 에 uid명에 따른 이미지파일을 업로드.
-                                uploadImage(uid)
+//                                uploadImage(uid)
 
 
 
@@ -161,27 +159,25 @@ class JoinActivity : AppCompatActivity() {
 
     }
 
-    private fun uploadImage(uid: String) {
-        // Firebase 저장되는 경로 지정.
-        val storage = Firebase.storage
-        val storageRef = storage.reference.child(uid + ".png")
-
-        // Get the data from an ImageView as bytes
-        profileImage.isDrawingCacheEnabled = true
-        profileImage.buildDrawingCache()
-        val bitmap = (profileImage.drawable as BitmapDrawable).bitmap
-        val baos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-        val data = baos.toByteArray()
-
-        var uploadTask = storageRef.putBytes(data)
-        uploadTask.addOnFailureListener {
-            // Handle unsuccessful uploads
-        }.addOnSuccessListener { taskSnapshot ->
-            // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
-            // ...
-        }
-    }
-
+//    private fun uploadImage(uid: String) {
+//        // Firebase 저장되는 경로 지정.
+//        val storage = Firebase.storage
+//        val storageRef = storage.reference.child(uid + ".png")
+//
+//        // Get the data from an ImageView as bytes
+//        profileImage.isDrawingCacheEnabled = true
+//        profileImage.buildDrawingCache()
+//        val bitmap = (profileImage.drawable as BitmapDrawable).bitmap
+//        val baos = ByteArrayOutputStream()
+//        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+//        val data = baos.toByteArray()
+//
+//        var uploadTask = storageRef.putBytes(data)
+//        uploadTask.addOnFailureListener {
+//            // Handle unsuccessful uploads
+//        }.addOnSuccessListener { taskSnapshot ->
+//            // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
+//            // ...
+//        }
 
 }

@@ -13,8 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:fontFamily="@font/nexonlight"
-        android:padding="10dp"
+        android:fontFamily="@font/jalnan"
+        android:layout_marginStart="20dp"
         android:text="사용자님"
         android:textSize="30dp" />
 
@@ -22,8 +22,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:fontFamily="@font/nexonlight"
-        android:padding="10dp"
+        android:fontFamily="@font/jalnan"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
         android:text="환영합니다"
         android:textSize="30dp" />
 

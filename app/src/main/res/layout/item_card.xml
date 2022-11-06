@@ -19,66 +19,72 @@
             android:id="@+id/itemName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginStart="10dp"
             android:text="Name"
-            android:fontFamily="@font/nexonlight"
+            android:fontFamily="@font/jalnan"
             android:textColor="#050000"
-            android:textSize="35dp"
+            android:textSize="30dp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/itemAge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:fontFamily="@font/nexonlight"
+            android:layout_marginTop="1dp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/jalnan"
             android:text="Age"
             android:textColor="#050000"
-            android:textSize="35dp"
+            android:textSize="30dp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/itemCity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:fontFamily="@font/nexonlight"
+            android:layout_marginTop="1dp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/jalnan"
             android:text="City"
             android:textColor="#050000"
-            android:textSize="35dp"
+            android:textSize="30dp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/itemLOLNickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nexonlight"
-            android:layout_margin="5dp"
-            android:text="LOLnickname"
+            android:fontFamily="@font/jalnan"
+            android:layout_marginTop="1dp"
+            android:layout_marginStart="10dp"
+            android:text="LOL nickname"
             android:textColor="#050000"
-            android:textSize="35dp"
+            android:textSize="30dp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/itemLOLPostion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nexonlight"
-            android:layout_margin="5dp"
-            android:text="LOLposition"
+            android:fontFamily="@font/jalnan"
+            android:layout_marginTop="1dp"
+            android:layout_marginStart="10dp"
+            android:text="LOL position"
             android:textColor="#050000"
-            android:textSize="35dp"
+            android:textSize="30dp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/itemLOLTier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:fontFamily="@font/nexonlight"
-            android:text="LOLtier"
+            android:layout_marginTop="1dp"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/jalnan"
+            android:text="LOL tier"
             android:textColor="#050000"
-            android:textSize="35dp"
+            android:textSize="30dp"
             android:textStyle="bold" />
 
     </LinearLayout>

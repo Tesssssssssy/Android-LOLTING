@@ -8,6 +8,7 @@
     tools:context=".auth.IntroActivity">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
@@ -28,62 +29,59 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.51">
 
-<!--        <com.google.android.gms.common.SignInButton-->
-<!--            android:id="@+id/google_login_btn"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="google login"-->
-<!--            android:layout_marginHorizontal="16dp"-->
-<!--            android:background="@drawable/rounded_button"-->
-<!--            android:textStyle="bold"-->
-<!--            app:backgroundTint="@color/white"-->
-<!--            app:icon="@drawable/google_logo"-->
-<!--            app:iconSize="20dp"-->
-<!--            app:iconTint="@color/black"-->
-<!--            app:iconGravity="start"-->
-<!--            app:iconPadding="4dp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            tools:ignore="MissingClass" />-->
-
+        <!--        <com.google.android.gms.common.SignInButton-->
+        <!--            android:id="@+id/google_login_btn"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="google login"-->
+        <!--            android:layout_marginHorizontal="16dp"-->
+        <!--            android:background="@drawable/rounded_button"-->
+        <!--            android:textStyle="bold"-->
+        <!--            app:backgroundTint="@color/white"-->
+        <!--            app:icon="@drawable/google_logo"-->
+        <!--            app:iconSize="20dp"-->
+        <!--            app:iconTint="@color/black"-->
+        <!--            app:iconGravity="start"-->
+        <!--            app:iconPadding="4dp"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            tools:ignore="MissingClass" />-->
 
 
         <Button
             android:id="@+id/joinbtn"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:layout_gravity="center"
             android:background="@drawable/rounded_button"
-            android:fontFamily="@font/nexonlight"
-            android:text="회원가입"
-            android:textStyle="bold"
             android:backgroundTint="@color/tutorial"
+            android:fontFamily="@font/jalnan"
+            android:text="회원가입"
             android:textColor="@color/white"
-            android:textSize="30sp"
-            android:bottomRightRadius="10dp"
-            android:bottomLeftRadius="10dp"
-            android:topLeftRadius="10dp"
-            android:topRightRadius="10dp"/>
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/loginbtn"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_margin="10dp"
             android:background="@drawable/rounded_button"
             android:backgroundTint="@color/tutorial"
-            android:fontFamily="@font/nexonlight"
+            android:fontFamily="@font/jalnan"
             android:text="로그인"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            android:textSize="30sp"
-            android:bottomRightRadius="10dp"
-            android:bottomLeftRadius="10dp"
-            android:topLeftRadius="10dp"
-            android:topRightRadius="10dp"/>
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
