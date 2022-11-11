@@ -34,7 +34,6 @@ class JoinActivity : AppCompatActivity() {
 
     private var nickname = ""
     private var gender = ""
-    private var city = ""
     private var age = ""
     private var uid = ""
     private var position = ""
@@ -91,8 +90,7 @@ class JoinActivity : AppCompatActivity() {
             }else if(genderbuff == "W" || genderbuff == "w"){
                 gender = "여"
             }
-            //도시, 나이, 롤포지션 저장
-            city = findViewById<TextInputEditText>(R.id.cityArea).text.toString()
+            //나이, 롤포지션 저장
             age = findViewById<TextInputEditText>(R.id.ageArea).text.toString()
             position = findViewById<TextInputEditText>(R.id.gamepositionArea).text.toString()
 
@@ -128,9 +126,9 @@ class JoinActivity : AppCompatActivity() {
                                     nickname,
                                     age,
                                     gender,
-                                    city,
                                     position,
                                     token,
+                                    "사는곳",
                                     "롤닉네임",
                                     "롤티어"
                                 )

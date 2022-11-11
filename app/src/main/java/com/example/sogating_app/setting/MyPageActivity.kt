@@ -1,19 +1,29 @@
 package com.example.sogating_app.setting
 
+import android.Manifest
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
-import androidx.appcompat.app.AppCompatActivity
+import android.location.Address
+import android.location.Geocoder
+import android.location.Location
+import android.os.Build
 import android.os.Bundle
+import android.os.Looper
 import android.util.Base64
 import android.util.Log
-import android.view.MenuItem
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.widget.Toolbar
+import androidx.annotation.Nullable
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.bumptech.glide.Glide
 import com.example.sogating_app.MAIN.MainActivity
 import com.example.sogating_app.Message.img.ImgApi
@@ -27,6 +37,8 @@ import com.github.kimcore.riot.RiotAPI
 import com.github.kimcore.riot.enums.Platform
 import com.github.kimcore.riot.enums.Region
 import com.github.kimcore.riot.errors.RiotException
+import com.google.android.gms.location.*
+import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
@@ -40,12 +52,13 @@ import kotlinx.android.synthetic.main.activity_my_page.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.ByteArrayOutputStream
+import java.util.*
+
 
 class MyPageActivity : AppCompatActivity() {
 
@@ -54,6 +67,15 @@ class MyPageActivity : AppCompatActivity() {
     private val uid = FirebaseAuthUtils.getUid()
     lateinit var myImage: ImageView
     lateinit var myLOLnicknameChange: TextInputEditText
+
+    // 도시 검색 변수 선언
+    private var mFusedLocationProviderClient: FusedLocationProviderClient? =
+        null // 현재 위치를 가져오기 위한 변수
+    lateinit var mLastLocation: Location // 위치 값을 가지고 있는 객체
+    internal lateinit var mLocationRequest: LocationRequest // 위치 정보 요청의 매개변수를 저장하는
+    private val REQUEST_PERMISSION_LOCATION = 10
+    lateinit var mylocation: LatLng
+    lateinit var addr: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,7 +124,8 @@ class MyPageActivity : AppCompatActivity() {
 
         // 티어체크 버튼 클릭
         checktierbtn.setOnClickListener {
-            val checkname: String = findViewById<TextInputEditText>(R.id.myLOLnicknameChange).text.toString()
+            val checkname: String =
+                findViewById<TextInputEditText>(R.id.myLOLnicknameChange).text.toString()
             var tierString: String
 
             // tiercheck 함수 실행, suspend 함수라서 코루틴 사용해야함
@@ -123,6 +146,16 @@ class MyPageActivity : AppCompatActivity() {
                 }
 
 
+            }
+        }
+        // 주소 변경 버튼 클릭
+        mLocationRequest = LocationRequest.create().apply {
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        }
+        var citybtn: Button = findViewById(R.id.citybtn)
+        citybtn.setOnClickListener {
+            if (checkPermissionForLocation(this)) {
+                startLocationUpdates()
             }
         }
 
@@ -189,7 +222,7 @@ class MyPageActivity : AppCompatActivity() {
     }
 
     //유저의 사진을 받아  flask_얼굴 인신 서버에 전송하여 얼굴 사진의 여부 파악
-    private fun scanImg(){
+    private fun scanImg() {
         //img를 byteArray로 변환
         myImage.isDrawingCacheEnabled = true
         myImage.buildDrawingCache()
@@ -203,26 +236,37 @@ class MyPageActivity : AppCompatActivity() {
         //retrofit를 이용하여 flask_server로 byteArray를 전송
         val api = ImgApi.create();
         val send_json = JSONObject()
-        send_json.put("data",imageString)
-        Log.d(TAG,"OK_IMG")
+        send_json.put("data", imageString)
+        Log.d(TAG, "OK_IMG")
         api.getScanResult(send_json).enqueue(object : Callback<ResponseData> {
             override fun onResponse(call: Call<ResponseData>, response: Response<ResponseData>) {
-                Log.d("ResponseData: ",response.body().toString())
-                if (response.body().toString().equals("ResponseData(result=1)")){
+                Log.d("ResponseData: ", response.body().toString())
+                if (response.body().toString().equals("ResponseData(result=1)")) {
                     uploadImage(uid)
-                    Toast.makeText(getApplicationContext(), "얼굴인식 완료, 이미지 변경이 완료 되었습니다.",Toast.LENGTH_SHORT).show();
-                }else if(response.body().toString().equals("ResponseData(result=2)")){
-                    Toast.makeText(getApplicationContext(), "얼굴인식 실패 혼자만 있는 사진을 선택해 주세요",Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(getApplicationContext(), "얼굴인식 실패 다른 사진을 선택해 주세요",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(
+                        getApplicationContext(),
+                        "얼굴인식 완료, 이미지 변경이 완료 되었습니다.",
+                        Toast.LENGTH_SHORT
+                    ).show();
+                } else if (response.body().toString().equals("ResponseData(result=2)")) {
+                    Toast.makeText(
+                        getApplicationContext(),
+                        "얼굴인식 실패 혼자만 있는 사진을 선택해 주세요",
+                        Toast.LENGTH_SHORT
+                    ).show();
+                } else {
+                    Toast.makeText(
+                        getApplicationContext(),
+                        "얼굴인식 실패 다른 사진을 선택해 주세요",
+                        Toast.LENGTH_SHORT
+                    ).show();
                 }
 
             }
 
             override fun onFailure(call: Call<ResponseData>, t: Throwable) {
-                Log.d("log","fail")
-                Toast.makeText(getApplicationContext(), "서버가 불안정 합니다",Toast.LENGTH_SHORT).show();
+                Log.d("log", "fail")
+                Toast.makeText(getApplicationContext(), "서버가 불안정 합니다", Toast.LENGTH_SHORT).show();
 
             }
 
@@ -279,5 +323,123 @@ class MyPageActivity : AppCompatActivity() {
         }
         // 데이터가 어디에 정의되어 있는 냐?
         FirebaseRef.userInfoRef.child(uid).addValueEventListener(postListener)
+    }
+
+    /* 주소 찾기 */
+    //주소로 위도,경도 구하는 GeoCoding
+    private fun getLatLng(address: String): LatLng {
+        val geoCoder = Geocoder(this, Locale.KOREA)   // Geocoder 로 자기 나라에 맞게 설정
+        val list = geoCoder.getFromLocationName(address, 3)
+
+        var location = LatLng(37.554891, 126.970814)     //임시 서울역
+
+        if (list != null) {
+            if (list.size == 0) {
+                Log.d("GeoCoding", "해당 주소로 찾는 위도 경도가 없습니다. 올바른 주소를 입력해주세요.")
+            } else {
+                val addressLatLng = list[0]
+                location = LatLng(addressLatLng.latitude, addressLatLng.longitude)
+                return location
+            }
+        }
+
+        return location
+    }
+
+    //위도 경도로 주소 구하는 Reverse-GeoCoding
+    private fun getAddress(position: LatLng): String {
+        val geoCoder = Geocoder(this, Locale.KOREA)
+        var addr = "주소 오류"
+        //GRPC 오류? try catch 문으로 오류 대처
+        try {
+            addr = geoCoder.getFromLocation(position.latitude, position.longitude, 1).first()
+                .getAddressLine(0)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return addr
+    }
+
+    private fun startLocationUpdates() {
+
+        //FusedLocationProviderClient의 인스턴스를 생성.
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            return
+        }
+        // 기기의 위치에 관한 정기 업데이트를 요청하는 메서드 실행
+        // 지정한 루퍼 스레드(Looper.myLooper())에서 콜백(mLocationCallback)으로 위치 업데이트를 요청
+        mFusedLocationProviderClient!!.requestLocationUpdates(
+            mLocationRequest,
+            mLocationCallback,
+            Looper.myLooper()
+        )
+    }
+
+    // 시스템으로 부터 위치 정보를 콜백으로 받음
+    private val mLocationCallback = object : LocationCallback() {
+        override fun onLocationResult(locationResult: LocationResult) {
+            // 시스템에서 받은 location 정보를 onLocationChanged()에 전달
+            locationResult.lastLocation
+            onLocationChanged(locationResult.lastLocation)
+        }
+    }
+
+    // 시스템으로 부터 받은 위치정보를 화면에 갱신해주는 메소드
+    fun onLocationChanged(location: Location) {
+        mLastLocation = location
+//        text2.text = "위도 : " + mLastLocation.latitude // 갱신 된 위도
+//        text1.text = "경도 : " + mLastLocation.longitude // 갱신 된 경도
+
+        mylocation = LatLng(mLastLocation.latitude, mLastLocation.longitude) // mylocation 변수 저장
+        myCity.text = getAddress(mylocation) //내주소
+        FirebaseRef.userInfoRef.child(uid).child("city").setValue(myCity.text)
+    }
+
+
+    // 위치 권한이 있는지 확인하는 메서드
+    private fun checkPermissionForLocation(context: Context): Boolean {
+        // Android 6.0 Marshmallow 이상에서는 위치 권한에 추가 런타임 권한이 필요
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                true
+            } else {
+                // 권한이 없으므로 권한 요청 알림 보내기
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    REQUEST_PERMISSION_LOCATION
+                )
+                false
+            }
+        } else {
+            true
+        }
+    }
+
+    // 사용자에게 권한 요청 후 결과에 대한 처리 로직
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_PERMISSION_LOCATION) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                startLocationUpdates()
+
+            } else {
+                Log.d("ttt", "onRequestPermissionsResult() _ 권한 허용 거부")
+                Toast.makeText(this, "권한이 없어 해당 기능을 실행할 수 없습니다.", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
