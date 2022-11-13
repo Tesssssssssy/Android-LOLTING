@@ -10,10 +10,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
 import com.example.sogating_app.R
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_call.*
 import java.util.*
 
@@ -27,7 +24,8 @@ var firebaseRef = firebaseMode.getReference("users")
 
 var isAudio = true
 var isVideo = true
-
+var check_out = 0
+val TAG ="CallActivity"
 
 
 class CallActivity : AppCompatActivity() {
@@ -36,8 +34,9 @@ class CallActivity : AppCompatActivity() {
         setContentView(R.layout.activity_call)
 
         username = intent.getStringExtra("username")!!
-
+        firebaseRef.addChildEventListener(childEventListener)
         callBtn.setOnClickListener {
+            check_out = 1
             friendsUsername = friendNameEdit.text.toString()
             sendCallRequest()
         }
@@ -45,7 +44,7 @@ class CallActivity : AppCompatActivity() {
         toggleAudioBtn.setOnClickListener {
             isAudio = !isAudio
             callJavascriptFunction("javascript:toggleAudio(\"${isAudio}\")")
-            toggleAudioBtn.setImageResource(if (isAudio) R.drawable.ic_baseline_mic_24 else R.drawable.ic_baseline_mic_off_24 )
+            toggleAudioBtn.setImageResource(if (isAudio) R.drawable.ic_baseline_mic_24 else R.drawable.ic_baseline_mic_off_24)
         }
 
 //        toggleVideoBtn.setOnClickListener {
@@ -56,14 +55,15 @@ class CallActivity : AppCompatActivity() {
 
         setupWebView()
     }
+
     private fun sendCallRequest() {
         if (!isPeerConnected) {
             Toast.makeText(this, "연결이 되지 않았습니다 인터넷을 확인해주세요", Toast.LENGTH_LONG).show()
             return
         }
         firebaseRef.child(friendsUsername).child("incoming").setValue(username)
-        Log.e("enter_point",username.toString())
-        firebaseRef.child(friendsUsername).child("isAvailable").addValueEventListener(object:
+        Log.e("enter_point", username.toString())
+        firebaseRef.child(friendsUsername).child("isAvailable").addValueEventListener(object :
             ValueEventListener {
 
             override fun onCancelled(error: DatabaseError) {}
@@ -81,7 +81,7 @@ class CallActivity : AppCompatActivity() {
     }
 
     private fun listenForConnId() {
-        firebaseRef.child(friendsUsername).child("connId").addValueEventListener(object:
+        firebaseRef.child(friendsUsername).child("connId").addValueEventListener(object :
             ValueEventListener {
             override fun onCancelled(error: DatabaseError) {}
 
@@ -97,7 +97,7 @@ class CallActivity : AppCompatActivity() {
 
     private fun setupWebView() {
 
-        webView.webChromeClient = object: WebChromeClient() {
+        webView.webChromeClient = object : WebChromeClient() {
             override fun onPermissionRequest(request: PermissionRequest?) {
                 request?.grant(request.resources)
             }
@@ -114,7 +114,7 @@ class CallActivity : AppCompatActivity() {
         val filePath = "file:android_asset/call.html"
         webView.loadUrl(filePath)
 
-        webView.webViewClient = object: WebViewClient() {
+        webView.webViewClient = object : WebViewClient() {
             override fun onPageFinished(view: WebView?, url: String?) {
                 initializePeer()
             }
@@ -128,7 +128,7 @@ class CallActivity : AppCompatActivity() {
         uniqueId = getUniqueID()
 
         callJavascriptFunction("javascript:init(\"${uniqueId}\")")
-        firebaseRef.child(username).child("incoming").addValueEventListener(object:
+        firebaseRef.child(username).child("incoming").addValueEventListener(object :
             ValueEventListener {
             override fun onCancelled(error: DatabaseError) {}
 
@@ -164,6 +164,7 @@ class CallActivity : AppCompatActivity() {
     private fun switchToControls() {
         inputLayout.visibility = View.GONE
         callControlLayout.visibility = View.VISIBLE
+
     }
 
 
@@ -185,8 +186,34 @@ class CallActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
+        if (check_out == 1) {
+            username = friendsUsername
+        }
         firebaseRef.child(username).setValue(null)
         webView.loadUrl("about:blank")
         super.onDestroy()
+
+    }
+
+    private val childEventListener = object : ChildEventListener {
+        override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+            Log.e("Listeners", "ChildEventListener-onChildAdded : ${snapshot.value}",)
+        }
+
+        override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {}
+
+        override fun onChildRemoved(snapshot: DataSnapshot) {
+            if(snapshot.child("connId").value.toString().equals(uniqueId)){
+                Toast.makeText(getApplicationContext(), "상대방이 나갔습니",Toast.LENGTH_SHORT).show();
+                Log.d(TAG,snapshot.child("connId").value.toString())
+            }
+
+        }
+
+
+        override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
+
+        override fun onCancelled(error: DatabaseError) {}
+
     }
 }

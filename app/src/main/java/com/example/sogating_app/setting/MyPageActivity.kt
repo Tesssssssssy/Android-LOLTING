@@ -226,11 +226,15 @@ class MyPageActivity : AppCompatActivity() {
         Log.d(TAG,"OK_IMG")
         api.getScanResult(send_json).enqueue(object : Callback<ResponseData> {
             override fun onResponse(call: Call<ResponseData>, response: Response<ResponseData>) {
-                Log.d("ResponseData: ",response.body().toString())
-                if (response.body().toString().equals("ResponseData(result=1)")){
+                var body = response.body().toString()
+                Log.d(TAG,"response data :"+body)
+
+                if (body.toString().indexOf('1') != -1){
                     uploadImage(uid)
+                    var cel_name = body.substring(34,body.lastIndex)
                     Toast.makeText(getApplicationContext(), "얼굴인식 완료, 이미지 변경이 완료 되었습니다.",Toast.LENGTH_SHORT).show();
-                }else if(response.body().toString().equals("ResponseData(result=2)")){
+                    Toast.makeText(getApplicationContext(), "당신의 닮은꼴 연예인은 " + cel_name + "입니다",Toast.LENGTH_SHORT).show();
+                }else if(body.toString().indexOf('2') != -1){
                     Toast.makeText(getApplicationContext(), "얼굴인식 실패 혼자만 있는 사진을 선택해 주세요",Toast.LENGTH_SHORT).show();
                 }
                 else{
