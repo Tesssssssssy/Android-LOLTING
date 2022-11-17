@@ -1,0 +1,11 @@
+RUN SERVER
+/home/ubuntu
+
+peerjs --port 9000 --key peerjs --path /videocallapp
+
+ex
+user1: init("1")
+user2: intit("2") another browser
+
+user1 browser
+    startCall("2")

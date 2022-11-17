@@ -17,8 +17,20 @@ class ExpandableListAdapter(
 
     override fun getGroupCount() = parents.size
     override fun getChildrenCount(parent: Int) = childList[parent].size
+    //    override fun getChildrenCount(parent: Int): Int {
+//        if(childList.size == 1){
+//            return childList[0].size
+//        }
+//        return childList[parent].size
+//    }
     override fun getGroup(parent: Int) = parents[parent]
     override fun getChild(parent: Int, child: Int): String = childList[parent][child]
+    //    override fun getChild(parent: Int, child: Int): String{
+//        if(childList.size == 1){
+//            return childList[0][child]
+//        }
+//        return childList[parent][child]
+//    }
     override fun getGroupId(parent: Int) = parent.toLong()
     override fun getChildId(parent: Int, child: Int) = child.toLong()
     override fun hasStableIds() = false

@@ -29,6 +29,7 @@ import com.example.sogating_app.MAIN.MainActivity
 import com.example.sogating_app.Message.img.ImgApi
 import com.example.sogating_app.Message.img.ResponseData
 import com.example.sogating_app.R
+import com.example.sogating_app.audio.VoiceChatActivity
 import com.example.sogating_app.auth.IntroActivity
 import com.example.sogating_app.auth.UserDataModel
 import com.example.sogating_app.utils.FirebaseAuthUtils
@@ -90,6 +91,18 @@ class MyPageActivity : AppCompatActivity() {
 
         getMyData()
 
+
+        //음성 채팅 시작
+        voiceChatBtn.setOnClickListener{
+            val intent = Intent(this, VoiceChatActivity::class.java)
+
+//            자신의 uid,상대방 uid 필요
+//            intent.putExtra("my_uid", my_uid)
+//            intnet.putExtra("another_uid",another_uid)
+            startActivity(intent)
+        }
+
+
         /* 이미지 클릭해서 교체하기 */
         myImage = findViewById(R.id.myImage)
         // 이미지를 클릭하면 핸드폰에 저장되어있는 이미지들을 불러옴.
@@ -100,11 +113,17 @@ class MyPageActivity : AppCompatActivity() {
                 myImage.setImageURI(uri)
             }
         )
+
+
+
+
         // getAction.launch() 메소드를 통해서 저장된 이미지를 변경.
         myImage.setOnClickListener {
             getAction.launch("image/*")
 
         }
+
+
 
         // 이미지 변경버튼
         changebtn.setOnClickListener {
@@ -240,26 +259,19 @@ class MyPageActivity : AppCompatActivity() {
         Log.d(TAG, "OK_IMG")
         api.getScanResult(send_json).enqueue(object : Callback<ResponseData> {
             override fun onResponse(call: Call<ResponseData>, response: Response<ResponseData>) {
-                Log.d("ResponseData: ", response.body().toString())
-                if (response.body().toString().equals("ResponseData(result=1)")) {
+                var body = response.body().toString()
+                Log.d(TAG,"response data :"+body)
+
+                if (body.toString().indexOf('1') != -1){
                     uploadImage(uid)
-                    Toast.makeText(
-                        getApplicationContext(),
-                        "얼굴인식 완료, 이미지 변경이 완료 되었습니다.",
-                        Toast.LENGTH_SHORT
-                    ).show();
-                } else if (response.body().toString().equals("ResponseData(result=2)")) {
-                    Toast.makeText(
-                        getApplicationContext(),
-                        "얼굴인식 실패 혼자만 있는 사진을 선택해 주세요",
-                        Toast.LENGTH_SHORT
-                    ).show();
-                } else {
-                    Toast.makeText(
-                        getApplicationContext(),
-                        "얼굴인식 실패 다른 사진을 선택해 주세요",
-                        Toast.LENGTH_SHORT
-                    ).show();
+                    var cel_name = body.substring(34,body.lastIndex)
+                    Toast.makeText(getApplicationContext(), "얼굴인식 완료, 이미지 변경이 완료 되었습니다.",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "당신의 닮은꼴 연예인은 " + cel_name + "입니다",Toast.LENGTH_SHORT).show();
+                }else if(body.toString().indexOf('2') != -1){
+                    Toast.makeText(getApplicationContext(), "얼굴인식 실패 혼자만 있는 사진을 선택해 주세요",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "얼굴인식 실패 다른 사진을 선택해 주세요",Toast.LENGTH_SHORT).show();
                 }
 
             }

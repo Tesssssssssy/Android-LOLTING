@@ -110,7 +110,7 @@ class MyLikeListActivity : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
                 if(dataSnapshot.children.count() == 0){
-                    Toast.makeText(this@MyLikeListActivity,"상대방이 좋아요한 사람이 아무도 없어요.",Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@MyLikeListActivity,"매칭이 되지 않았습니다.",Toast.LENGTH_LONG).show()
                 }else{
                     for (dataModel in dataSnapshot.children){
 
@@ -122,7 +122,7 @@ class MyLikeListActivity : AppCompatActivity() {
                             showDialog()
 
                         }else{
-                            //Toast.makeText(this@MyLikeListActivity,"매칭이 실패하였습니다.",Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@MyLikeListActivity,"매칭이 되지 않았습니다.",Toast.LENGTH_LONG).show()
                         }
 
                     }
