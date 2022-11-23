@@ -10,7 +10,7 @@
 - build:gradle:7.2.2
 - Kotlin Version : 1.7.10
 - Android   Min Sdk Version :23
-- Android Complie Sdk Version :33
+- Android Complie Sdk Version :32
 
 
 ### 프로젝트 일정 관리 [Notion]
