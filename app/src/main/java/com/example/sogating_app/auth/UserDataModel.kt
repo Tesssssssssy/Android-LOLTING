@@ -8,6 +8,8 @@ data class UserDataModel(
     val position: String? = null,
     val token : String? = null,
 
+    // 닮은꼴
+    val face: String? = null,
     // 사는곳 데이터
     val city: String? = null,
     // 롤 데이터

@@ -35,6 +35,7 @@ class CardStackAdapter(val context: Context, val items: MutableList<UserDataMode
         val image = itemView.findViewById<ImageView>(R.id.profileImageArea)
 
         // 카드에 있는 유저의 정보들을 가져온다.
+        val face = itemView.findViewById<TextView>(R.id.itemFace)
         val nickname = itemView.findViewById<TextView>(R.id.itemName)
         val age = itemView.findViewById<TextView>(R.id.itemAge)
         val city = itemView.findViewById<TextView>(R.id.itemCity)
@@ -57,6 +58,7 @@ class CardStackAdapter(val context: Context, val items: MutableList<UserDataMode
                 }
 
             })
+            face.text = data.face
             nickname.text = data.nickname
             age.text = data.age
             city.text = data.city
