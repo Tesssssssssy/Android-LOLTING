@@ -421,7 +421,7 @@ class MyPageActivity : AppCompatActivity() {
 
         mylocation = LatLng(mLastLocation.latitude, mLastLocation.longitude) // mylocation 변수 저장
         var buff = getAddress(mylocation).split(" ")
-        myCity.text = buff[0] + " " + buff[1] + " " + buff[2] + " " + buff[3] //내주소
+        myCity.text = buff[0] + " " + buff[1] + " " + buff[2]  //내주소
         FirebaseRef.userInfoRef.child(uid).child("city").setValue(myCity.text)
     }
 
