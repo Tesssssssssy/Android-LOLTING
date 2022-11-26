@@ -33,7 +33,8 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
-                android:layout_margin="20dp" />
+                android:layout_margin="20dp"
+                android:src="@drawable/profile"/>
 
             <Button
                 android:id="@+id/changebtn"

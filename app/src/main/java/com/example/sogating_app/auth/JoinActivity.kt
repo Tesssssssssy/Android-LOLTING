@@ -23,6 +23,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.ktx.storage
+import kotlinx.android.synthetic.main.activity_join.*
 import java.io.ByteArrayOutputStream
 
 
@@ -57,8 +58,8 @@ class JoinActivity : AppCompatActivity() {
 //                profileImage.setImageURI(uri)
 //            }
 //        )
-
-        // getAction.launch() 메소드를 통해서 저장된 이미지를 변경.
+//
+//        // getAction.launch() 메소드를 통해서 저장된 이미지를 변경.
 //        profileImage.setOnClickListener {
 //            getAction.launch("image/*")
 //        }
@@ -166,7 +167,7 @@ class JoinActivity : AppCompatActivity() {
 //        // Get the data from an ImageView as bytes
 //        profileImage.isDrawingCacheEnabled = true
 //        profileImage.buildDrawingCache()
-//        val bitmap = (profileImage.drawable as BitmapDrawable).bitmap
+//        val bitmap = (profileImage as BitmapDrawable).bitmap
 //        val baos = ByteArrayOutputStream()
 //        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
 //        val data = baos.toByteArray()
@@ -178,5 +179,6 @@ class JoinActivity : AppCompatActivity() {
 //            // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
 //            // ...
 //        }
-
+//
+//    }
 }
