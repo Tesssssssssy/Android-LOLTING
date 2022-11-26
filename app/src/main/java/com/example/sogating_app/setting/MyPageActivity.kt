@@ -29,6 +29,7 @@ import com.example.sogating_app.MAIN.MainActivity
 import com.example.sogating_app.Message.img.ImgApi
 import com.example.sogating_app.Message.img.ResponseData
 import com.example.sogating_app.R
+import com.example.sogating_app.audio.MultiVoiceActivity
 import com.example.sogating_app.audio.VoiceChatActivity
 import com.example.sogating_app.auth.IntroActivity
 import com.example.sogating_app.auth.UserDataModel
@@ -99,6 +100,12 @@ class MyPageActivity : AppCompatActivity() {
 //            자신의 uid,상대방 uid 필요
 //            intent.putExtra("my_uid", my_uid)
 //            intnet.putExtra("another_uid",another_uid)
+            startActivity(intent)
+        }
+
+        multiVoiceChatBtn.setOnClickListener {
+            val intent = Intent(this, MultiVoiceActivity::class.java)
+
             startActivity(intent)
         }
 

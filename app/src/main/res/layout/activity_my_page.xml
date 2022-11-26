@@ -46,6 +46,7 @@
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
             <Button
                 android:id="@+id/voiceChatBtn"
                 android:layout_width="179dp"
@@ -53,6 +54,13 @@
                 android:layout_gravity="center"
                 android:text="Voice_chat" />
 
+
+            <Button
+                android:id="@+id/multiVoiceChatBtn"
+                android:layout_width="177dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:text="MultiVoice_chat" />
 
             <TextView
                 android:id="@+id/myUID"
