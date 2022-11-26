@@ -76,6 +76,9 @@ dependencies {
 
     //구글주소
     implementation 'com.google.android.gms:play-services-location:18.0.0'
+    
+    //이미지 블러
+    implementation 'jp.wasabeef:glide-transformations:4.3.0'
 }
 task wrapper(type: Wrapper) {
     gradleVersion = '7.0'

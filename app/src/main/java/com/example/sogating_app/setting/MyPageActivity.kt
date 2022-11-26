@@ -63,6 +63,8 @@ import java.util.*
 
 
 class MyPageActivity : AppCompatActivity() {
+    //키 24시간 마다 초기화!
+    val RIOTKEY = "RGAPI-b8e78e44-7b78-4822-b74b-26057d6049dc"
 
     private val TAG = "MyPageActivity::class.java"
     private lateinit var auth: FirebaseAuth
@@ -143,7 +145,7 @@ class MyPageActivity : AppCompatActivity() {
 
         /* RIOT API setting */
         //임시 api key setting 24시간마다 갱신해야됨!!!
-        RiotAPI.setApiKey("RGAPI-45828416-1843-40c5-8ecd-c27366c40c72")
+        RiotAPI.setApiKey(RIOTKEY)
         // optional, defaults to KR, ASIA
         RiotAPI.setDefaultPlatform(Platform.KR)
         RiotAPI.setDefaultRegion(Region.ASIA)
@@ -274,6 +276,10 @@ class MyPageActivity : AppCompatActivity() {
                     var cel_name = body.substring(34,body.lastIndex)
                     Toast.makeText(getApplicationContext(), "얼굴인식 완료, 이미지 변경이 완료 되었습니다.",Toast.LENGTH_SHORT).show();
                     Toast.makeText(getApplicationContext(), "당신의 닮은꼴 연예인은 " + cel_name + "입니다",Toast.LENGTH_SHORT).show();
+                    val myFace = findViewById<TextView>(R.id.myFace)
+                    myFace.text = cel_name + " 닮은꼴"
+                    FirebaseRef.userInfoRef.child(uid).child("face").setValue(myFace.text)
+
                 }else if(body.toString().indexOf('2') != -1){
                     Toast.makeText(getApplicationContext(), "얼굴인식 실패 혼자만 있는 사진을 선택해 주세요",Toast.LENGTH_SHORT).show();
                 }
@@ -297,6 +303,7 @@ class MyPageActivity : AppCompatActivity() {
     private fun getMyData() {
         val myImage = findViewById<ImageView>(R.id.myImage)
         val myUid = findViewById<TextView>(R.id.myUID)
+        val myFace = findViewById<TextView>(R.id.myFace)
         val myNickname = findViewById<TextView>(R.id.myNickname)
         val myAge = findViewById<TextView>(R.id.myAge)
         val myCity = findViewById<TextView>(R.id.myCity)
@@ -315,6 +322,7 @@ class MyPageActivity : AppCompatActivity() {
                 //uid 는 받아와서 저장하지만 레이아웃에선 visiblity 를 gone 하여 감춰둠
                 myUid.text = data!!.uid
 
+                myFace.text = data!!.face
                 myNickname.text = data!!.nickname
                 myAge.text = data!!.age
                 myCity.text = data!!.city
@@ -419,7 +427,8 @@ class MyPageActivity : AppCompatActivity() {
 //        text1.text = "경도 : " + mLastLocation.longitude // 갱신 된 경도
 
         mylocation = LatLng(mLastLocation.latitude, mLastLocation.longitude) // mylocation 변수 저장
-        myCity.text = getAddress(mylocation) //내주소
+        var buff = getAddress(mylocation).split(" ")
+        myCity.text = buff[0] + " " + buff[1] + " " + buff[2]  //내주소
         FirebaseRef.userInfoRef.child(uid).child("city").setValue(myCity.text)
     }
 

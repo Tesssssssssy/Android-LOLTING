@@ -128,6 +128,7 @@ class JoinActivity : AppCompatActivity() {
                                     gender,
                                     position,
                                     token,
+                                    "내얼굴",
                                     "사는곳",
                                     "롤닉네임",
                                     "롤티어"

@@ -8,11 +8,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.RequestOptions.bitmapTransform
 import com.example.sogating_app.R
 import com.example.sogating_app.auth.UserDataModel
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import jp.wasabeef.glide.transformations.BlurTransformation
 
 class CardStackAdapter(val context: Context, val items: MutableList<UserDataModel>) : RecyclerView.Adapter<CardStackAdapter.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardStackAdapter.ViewHolder {
@@ -35,6 +38,7 @@ class CardStackAdapter(val context: Context, val items: MutableList<UserDataMode
         val image = itemView.findViewById<ImageView>(R.id.profileImageArea)
 
         // 카드에 있는 유저의 정보들을 가져온다.
+        val face = itemView.findViewById<TextView>(R.id.itemFace)
         val nickname = itemView.findViewById<TextView>(R.id.itemName)
         val age = itemView.findViewById<TextView>(R.id.itemAge)
         val city = itemView.findViewById<TextView>(R.id.itemCity)
@@ -53,10 +57,13 @@ class CardStackAdapter(val context: Context, val items: MutableList<UserDataMode
                 if(task.isSuccessful){
                     Glide.with(context)
                         .load(task.result)
+                        //이미지 블러처리
+                        .apply(RequestOptions.bitmapTransform(BlurTransformation(25, 3)))
                         .into(image)
                 }
 
             })
+            face.text = data.face
             nickname.text = data.nickname
             age.text = data.age
             city.text = data.city
