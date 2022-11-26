@@ -85,9 +85,9 @@ class JoinActivity : AppCompatActivity() {
 
             // 성별의 경우 남, 여 로만 저장
             val genderbuff = findViewById<TextInputEditText>(R.id.genderArea).text.toString()
-            if(genderbuff == "M" || genderbuff == "m"){
+            if (genderbuff == "M" || genderbuff == "m") {
                 gender = "남"
-            }else if(genderbuff == "W" || genderbuff == "w"){
+            } else if (genderbuff == "W" || genderbuff == "w") {
                 gender = "여"
             }
             //나이, 롤포지션 저장
@@ -110,7 +110,11 @@ class JoinActivity : AppCompatActivity() {
                         FirebaseMessaging.getInstance().token.addOnCompleteListener(
                             OnCompleteListener { task ->
                                 if (!task.isSuccessful) {
-                                    Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                                    Log.w(
+                                        TAG,
+                                        "Fetching FCM registration token failed",
+                                        task.exception
+                                    )
                                     return@OnCompleteListener
                                 }
 
@@ -142,8 +146,7 @@ class JoinActivity : AppCompatActivity() {
 //                                uploadImage(uid)
 
 
-
-                        })
+                            })
 
                         // 회원가입시 메인 액티비티로 이동.
                         val intent = Intent(this, MainActivity::class.java)
@@ -157,6 +160,7 @@ class JoinActivity : AppCompatActivity() {
         }
 
     }
+}
 
 //    private fun uploadImage(uid: String) {
 //        // Firebase 저장되는 경로 지정.
@@ -178,5 +182,5 @@ class JoinActivity : AppCompatActivity() {
 //            // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
 //            // ...
 //        }
-
-}
+//
+//}

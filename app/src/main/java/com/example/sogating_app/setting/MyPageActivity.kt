@@ -114,6 +114,7 @@ class MyPageActivity : AppCompatActivity() {
 
         /* 이미지 클릭해서 교체하기 */
         myImage = findViewById(R.id.myImage)
+
         // 이미지를 클릭하면 핸드폰에 저장되어있는 이미지들을 불러옴.
         // registerForActivityResult()를 통해서 핸드폰에 저장되어있는 저장소에 접근한다.
         val getAction = registerForActivityResult(

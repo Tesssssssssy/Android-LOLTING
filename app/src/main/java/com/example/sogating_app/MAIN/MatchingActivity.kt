@@ -184,7 +184,6 @@ MatchingActivity : AppCompatActivity() {
 
 
                 }
-
                 cardStackAdapter.notifyDataSetChanged() // 현재 회원가입된 유저의 정보로 카드스택어뎁터 동기화.
             }
 
