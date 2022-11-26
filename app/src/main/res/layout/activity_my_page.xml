@@ -55,7 +55,6 @@
                 android:layout_gravity="center"
                 android:text="Voice_chat" />
 
-
             <Button
                 android:id="@+id/multiVoiceChatBtn"
                 android:layout_width="177dp"
@@ -109,7 +108,6 @@
                 android:textStyle="bold" />
 
 
-
             <TextView
                 android:id="@+id/myGender"
                 android:layout_width="wrap_content"
@@ -120,7 +118,6 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
-
 
             <TextView
                 android:id="@+id/myCity"
@@ -189,7 +186,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:fontFamily="@font/jalnan"
-                    android:hint="자신의 롤 아이디를 입력해 주세요" />
+                    android:hint="롤 아이디를 입력해야만 내 계정이 보여집니다" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
