@@ -64,7 +64,7 @@ import java.util.*
 
 class MyPageActivity : AppCompatActivity() {
     //키 24시간 마다 초기화!
-    val RIOTKEY = "RGAPI-b8e78e44-7b78-4822-b74b-26057d6049dc"
+    val RIOTKEY = "RGAPI-21458e69-9f20-454a-8ecf-6f07aa054db7"
 
     private val TAG = "MyPageActivity::class.java"
     private lateinit var auth: FirebaseAuth
