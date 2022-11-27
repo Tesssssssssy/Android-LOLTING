@@ -30,8 +30,10 @@ import java.io.ByteArrayOutputStream
 class JoinActivity : AppCompatActivity() {
 
     private val TAG = "JoinActivity"
-    private lateinit var auth: FirebaseAuth
+
     // Initialize Firebase Auth
+    private lateinit var auth: FirebaseAuth
+
 
     private var nickname = ""
     private var gender = ""
@@ -45,6 +47,8 @@ class JoinActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_join)
+
+        // 파이어베이스 인증 초기화
         auth = Firebase.auth
 
         // 이미지를 클릭하면 핸드폰에 저장되어있는 이미지들을 불러옴.
@@ -96,7 +100,7 @@ class JoinActivity : AppCompatActivity() {
             position = findViewById<TextInputEditText>(R.id.gamepositionArea).text.toString()
 
 
-            // 회원가입시 Firebase에 유저의 정보들을 저장한다.
+            // 회원가입시 Firebase에 유저의 정보들을 저장한다. -  회원가입 기능 구현.
             auth.createUserWithEmailAndPassword(email.text.toString(), pwd.text.toString())
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {

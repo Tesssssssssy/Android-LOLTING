@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
@@ -16,8 +16,21 @@
         android:roundIcon="@mipmap/loltingicon"
         android:supportsRtl="true"
         android:theme="@style/Theme.Sogating_App"
-        android:usesCleartextTraffic="true">>
-        <!-- auth and login -->
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name="Messenger.ChatActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name="Messenger.ChatMainActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity> <!-- auth and login -->
         <activity
             android:name=".auth.SplashActivity"
             android:exported="true">
@@ -35,16 +48,14 @@
             android:exported="true" />
         <activity
             android:name=".auth.IntroActivity"
-            android:exported="true" />
-        <!-- firebase service -->
+            android:exported="true" /> <!-- firebase service -->
         <service
             android:name=".Message.fcm.FirebaseService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </service>
-        <!-- main and navigation -->
+        </service> <!-- main and navigation -->
         <activity
             android:name=".MAIN.MainActivity"
             android:exported="true" />
