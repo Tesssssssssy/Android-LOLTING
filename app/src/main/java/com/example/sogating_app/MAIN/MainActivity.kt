@@ -1,5 +1,6 @@
 package com.example.sogating_app.MAIN
 
+import Messenger.ChatMainActivity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -141,7 +142,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     /* ExpandableListView 설정 */
     private fun setExpandableList() {
-        val parentList = mutableListOf("내정보","매칭하러가기","내가좋아요한 사람목록", "메시지함")
+        val parentList = mutableListOf("내정보","매칭하러가기","좋아요한 친구 목록","매칭된 친구 목록", "메시지함")
         val childList = mutableListOf(
             mutableListOf("내정보","원하는 상대 정보"),
             mutableListOf(),
@@ -162,13 +163,18 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     val intent = Intent(this, MatchingActivity::class.java)
                     startActivity(intent)
                 }
-                //나에게 온 매칭
+                //좋아요한 친구 목록
                 2 -> {
                     val intent = Intent(this, MyLikeListActivity::class.java)
                     startActivity(intent)
                 }
-                //친구목록
+                // 매칭된 친구 목록
                 3 -> {
+                    val intent = Intent(this, ChatMainActivity::class.java)
+                    startActivity(intent)
+                }
+                // 메시지함
+                4 -> {
                     val intent = Intent(this, MyMsgActivity::class.java)
                     startActivity(intent)
                 }

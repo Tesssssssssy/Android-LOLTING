@@ -20,8 +20,10 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        // 파이어베이스 인증 초기화
         auth = Firebase.auth
 
+        // 로그인 버튼 이벤트
         val loginBtn = findViewById<Button>(R.id.loginbtn)
         loginBtn.setOnClickListener {
             val email = findViewById<TextInputEditText>(R.id.emailArea)

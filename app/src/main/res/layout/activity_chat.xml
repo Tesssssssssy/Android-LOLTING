@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation = "vertical">
+    <androidx.appcompat.widget.Toolbar
+        android:id ="@+id/toolbar"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation = "horizontal"
+        >
+        <TextView
+            android:id="@+id/chatId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="상대방 이름"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:background="@drawable/btn_background"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/voice_btn"
+            android:layout_gravity="center"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:background="@drawable/btn_background"
+            android:text="음성 채팅 기능"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            />
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- 대화 내용 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id = "@+id/chat_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentTop ="true"
+        android:layout_above="@+id/input_layout"
+        />
+
+    <!-- 입력 레이아웃 -->
+    <LinearLayout
+        android:id="@+id/input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom = "true"
+        android:orientation = "horizontal"
+        android:layout_marginBottom="10dp"
+        android:weightSum="100">
+
+        <EditText
+            android:id="@+id/message_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_weight="85"
+            android:background = "@drawable/edit_background"
+            android:hint = "메시지를 입력하세요."
+            android:paddingStart="10dp"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/send_btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="15"
+            android:background = "@drawable/btn_background"
+            android:text ="전송"
+            android:textColor = "@android:color/white"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
