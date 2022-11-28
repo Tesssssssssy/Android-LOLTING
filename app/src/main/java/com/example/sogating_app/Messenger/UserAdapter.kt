@@ -1,4 +1,4 @@
-package Messenger
+package com.example.sogating_app.Messenger
 
 import android.content.Context
 import android.content.Intent

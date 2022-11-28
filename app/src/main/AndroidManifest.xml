@@ -19,14 +19,14 @@
         android:theme="@style/Theme.Sogating_App"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="Messenger.ChatActivity"
+            android:name=".Messenger.ChatActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="Messenger.ChatMainActivity"
+            android:name=".Messenger.ChatMainActivity"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"

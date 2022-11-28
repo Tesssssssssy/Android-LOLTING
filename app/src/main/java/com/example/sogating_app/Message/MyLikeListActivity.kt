@@ -117,6 +117,8 @@ class MyLikeListActivity : AppCompatActivity() {
                         val likeUserKey  = dataModel.key.toString()
 
                         if(likeUserKey.equals(uid)){
+                            Log.d("my uid",uid)
+                            Log.d("another uid", getterUid)
                             Toast.makeText(this@MyLikeListActivity,"매칭이 되었습니다.",Toast.LENGTH_LONG).show()
                             // Dialog 띄우기
                             showDialog()

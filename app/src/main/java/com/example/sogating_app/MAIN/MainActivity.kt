@@ -1,6 +1,6 @@
 package com.example.sogating_app.MAIN
 
-import Messenger.ChatMainActivity
+import com.example.sogating_app.Messenger.ChatMainActivity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log

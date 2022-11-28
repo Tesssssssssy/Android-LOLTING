@@ -1,7 +1,8 @@
-package Messenger
+package com.example.sogating_app.Messenger
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sogating_app.R
 import com.example.sogating_app.auth.UserDataModel
@@ -14,6 +15,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 
 class ChatMainActivity : AppCompatActivity() {
@@ -28,6 +30,8 @@ class ChatMainActivity : AppCompatActivity() {
     // 유저 어뎁터 및 리스트 설정
     lateinit var adapter : UserAdapter
     private lateinit var userList : ArrayList<UserDataModel>
+    private lateinit var iLikeUser : ArrayList<String>
+    private lateinit var matchUser : ArrayList<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,12 +47,47 @@ class ChatMainActivity : AppCompatActivity() {
         // 리스트 초기화
         userList = ArrayList()
 
-        // 어뎁터 초기화
+        // 내 좋아 하는 유저
+        iLikeUser = ArrayList()
+
+        //매칭된 유저 리스트
+        matchUser = ArrayList()
+        // 어뎁터 초기화가
         adapter = UserAdapter(this, userList)
 
         // RecyclerView 초기화
         binding.userRecyclerview.layoutManager = LinearLayoutManager(this)
         binding.userRecyclerview.adapter = adapter
+
+
+        // 내가 좋아하는 유저 정보 가져오기
+        FirebaseRef.userLikeRef.addValueEventListener(object :ValueEventListener{
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                for(postSnapshot in snapshot.children){
+                    if(postSnapshot.key.equals(mAuth.currentUser?.uid.toString())) {
+                        for (subPostSnapshot in postSnapshot.children) {
+                            iLikeUser.add(subPostSnapshot.key.toString())
+                        }
+                    }
+                }
+
+                for(postSnapshot in snapshot.children){
+                    for(subPostSnapshot in postSnapshot.children){
+                        if(iLikeUser.contains(subPostSnapshot.key.toString())){
+                            matchUser.add(subPostSnapshot.key.toString())
+                        }
+                    }
+                }
+                Log.d("i like user", iLikeUser.toString())
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
 
 
         // 사용자 정보 가져오기
@@ -60,7 +99,7 @@ class ChatMainActivity : AppCompatActivity() {
                 for(postSnapshot in snapshot.children){
                     val currentUser = postSnapshot.getValue(UserDataModel::class.java) // 유저 정보
 
-                    if (mAuth.currentUser?.uid != currentUser?.uid){
+                    if (matchUser.contains(currentUser?.uid.toString())){
                         //mAuth 객체를 통해서 현재 로그인한 나의 정보를 알 수 있다.
                         // 나의 uid와 등록된 사용자 uid 정보가 다를 때만 userList에 추가한다.
                         userList.add(currentUser!!)

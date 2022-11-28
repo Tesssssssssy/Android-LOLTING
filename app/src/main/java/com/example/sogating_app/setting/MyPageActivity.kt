@@ -96,20 +96,20 @@ class MyPageActivity : AppCompatActivity() {
 
 
         //음성 채팅 시작
-        voiceChatBtn.setOnClickListener{
-            val intent = Intent(this, VoiceChatActivity::class.java)
-
-//            자신의 uid,상대방 uid 필요
-//            intent.putExtra("my_uid", my_uid)
-//            intnet.putExtra("another_uid",another_uid)
-            startActivity(intent)
-        }
-
-        multiVoiceChatBtn.setOnClickListener {
-            val intent = Intent(this, MultiVoiceActivity::class.java)
-
-            startActivity(intent)
-        }
+//        voiceChatBtn.setOnClickListener{
+//            val intent = Intent(this, VoiceChatActivity::class.java)
+//
+////            자신의 uid,상대방 uid 필요
+////            intent.putExtra("my_uid", my_uid)
+////            intnet.putExtra("another_uid",another_uid)
+//            startActivity(intent)
+//        }
+//
+//        multiVoiceChatBtn.setOnClickListener {
+//            val intent = Intent(this, MultiVoiceActivity::class.java)
+//
+//            startActivity(intent)
+//        }
 
 
         /* 이미지 클릭해서 교체하기 */
