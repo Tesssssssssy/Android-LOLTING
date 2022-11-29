@@ -79,6 +79,9 @@ dependencies {
     
     //이미지 블러
     implementation 'jp.wasabeef:glide-transformations:4.3.0'
+
+    //대기 화면
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 }
 task wrapper(type: Wrapper) {
     gradleVersion = '7.0'

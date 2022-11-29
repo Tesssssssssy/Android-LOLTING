@@ -1,6 +1,7 @@
 package com.example.sogating_app.Messenger
 
 import android.Manifest
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
@@ -14,8 +15,10 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Button
 import android.widget.Toast
+import android.widget.Toast.LENGTH_LONG
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.sogating_app.R
 import com.example.sogating_app.audio.*
 import com.example.sogating_app.utils.FirebaseRef
@@ -29,23 +32,26 @@ import kotlinx.android.synthetic.main.activity_chat.*
 import java.util.*
 import kotlin.collections.ArrayList
 // 음성채팅 변수 초기화
-var myUID = ""
-var anotherUID = ""
-
-var isPeerConnected = false
-var firebaseMode = FirebaseDatabase.getInstance("https://sogating-test-default-rtdb.firebaseio.com/")
-
-var firebaseRef = firebaseMode.getReference("users_voice_chat")
-
-var isAudio = true
-var isVideo = true
-var check_out = 0
-
-val permissions = arrayOf(Manifest.permission.RECORD_AUDIO)
-val requestcode = 1
 
 
 class ChatActivity : AppCompatActivity() {
+    var myUID = ""
+    var anotherUID = ""
+
+    var isPeerConnected = false
+    var firebaseMode = FirebaseDatabase.getInstance("https://sogating-test-default-rtdb.firebaseio.com/")
+
+    var firebaseRef = firebaseMode.getReference("users_voice_chat")
+
+    var isAudio = true
+    var isVideo = true
+    var check_out = 0
+
+    val permissions = arrayOf(Manifest.permission.RECORD_AUDIO)
+    val requestcode = 1
+
+    var initCheck = 0
+    lateinit var  pro :ProgressDialog
     // 바이딩 객체
     private lateinit var binding: ActivityChatBinding
 
@@ -62,11 +68,13 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var messageList: ArrayList<Message> // 메시지 리스트
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        // 대기 다이얼로그 초기화
 
 
         // 메시지 리스트 초기화
@@ -99,14 +107,11 @@ class ChatActivity : AppCompatActivity() {
         // 툴바에 상대방 이름 보여주기
         binding.chatId.text = receiverName
 
-        if (senderUid != null) {
-            Log.d("my uid",senderUid)
-        }
-        Log.d("another uid",receiverUid)
-        //            자신의 uid,상대방 uid
+        //자신의 uid,상대방 uid
         if (senderUid != null) {
             myUID = senderUid
         }
+        anotherUID = receiverUid
 
         // 음성 채팅 버튼 이벤트 리스너
         voiceChatBtn.setOnClickListener {
@@ -119,6 +124,7 @@ class ChatActivity : AppCompatActivity() {
 
             anotherUID = receiverUid
             check_out = 1
+            pro = ProgressDialog.show(this, "통화 대기중 입니다.", "")
             sendCallRequest()
 
         }
@@ -165,8 +171,8 @@ class ChatActivity : AppCompatActivity() {
 
             })
         // 음성채팅 구현
-        firebaseRef.addChildEventListener(childEventListener)
         toggleAudioBtn.setOnClickListener {
+
             isAudio = !isAudio
             callJavascriptFunction("javascript:toggleAudio(\"${isAudio}\")")
             toggleAudioBtn.setImageResource(if (isAudio) R.drawable.ic_baseline_mic_24 else R.drawable.ic_baseline_mic_off_24)
@@ -212,8 +218,10 @@ class ChatActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.value == null)
                     return
+                pro.dismiss()
                 switchToControls()
                 callJavascriptFunction("javascript:startCall(\"${snapshot.value}\")")
+                check_out = 2
             }
 
         })
@@ -232,6 +240,7 @@ class ChatActivity : AppCompatActivity() {
         webView.addJavascriptInterface(JavascriptInterface(this), "Android")
 
         loadVideoCall()
+        initCheck = 1
     }
 
     private fun loadVideoCall() {
@@ -253,20 +262,62 @@ class ChatActivity : AppCompatActivity() {
 
         callJavascriptFunction("javascript:init(\"${uniqueId}\")")
 
+        //상대방이 통화를 요청 했을때 실행
         firebaseRef.child(myUID).child("incoming").addValueEventListener(object :
             ValueEventListener {
             override fun onCancelled(error: DatabaseError) {}
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                Log.d(TAG,"onCallRequest" + snapshot.toString())
-                onCallRequest(snapshot.value as? String)
+                if (initCheck != 0) {
+                    Log.d(TAG, "onCallRequest" + snapshot.toString())
+                    onCallRequest(snapshot.value as? String)
+                }
             }
+        })
 
+        //상대가 통화를 거절 할 때 실행
+        firebaseRef.child(anotherUID).child("incoming").addValueEventListener(object :
+            ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {}
 
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.value == null && initCheck !=0 && check_out == 1){
+                    Log.d(TAG,"상대가 거절 했습니다.")
+                    pro.dismiss()
+                    Toast.makeText(this@ChatActivity, "상대가 거절 했습니다.",Toast.LENGTH_SHORT).show();
+
+                    check_out = 0
+                }
+            }
+        })
+
+        //상대가 통화가 종료 됬을 때 실행
+        firebaseRef.child(anotherUID).child("connId").addValueEventListener(object :
+            ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {}
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.value == null && initCheck !=0 && check_out == 2) {
+                    Log.d(TAG,"상대가 통화를 종료 했습니다.")
+                    pro.dismiss()
+                    back_main_notice.visibility = View.VISIBLE
+                    back_chatBtn.visibility= View.VISIBLE
+                    check_out = 0
+                    back_chatBtn.setOnClickListener {
+
+                        switchToControls_back()
+                        if (check_out == 1) {
+                            myUID = anotherUID
+                        }
+                        firebaseRef.child(myUID).setValue(null)
+                        webView.loadUrl("about:blank")
+                    }
+                }
+            }
         })
 
     }
-
+    //상대의 통화 요청을 받았을 때
     private fun onCallRequest(caller: String?) {
         if (caller == null){
             return
@@ -283,6 +334,7 @@ class ChatActivity : AppCompatActivity() {
 
             callLayout.visibility = View.GONE
             switchToControls()
+            check_out = 2
         }
 
         rejectBtn.setOnClickListener {
@@ -293,7 +345,7 @@ class ChatActivity : AppCompatActivity() {
         }
 
     }
-
+    //UI 제어(통화 상태)
     private fun switchToControls() {
         toolbar.visibility = View.GONE
         input_layout.visibility=View.GONE
@@ -301,6 +353,17 @@ class ChatActivity : AppCompatActivity() {
         chat_recyclerView.visibility = View.GONE
 
     }
+
+    //UI 제어(채팅 상태)
+    private fun switchToControls_back() {
+        toolbar.visibility = View.VISIBLE
+        input_layout.visibility=View.VISIBLE
+        callControlLayout.visibility = View.GONE
+        chat_recyclerView.visibility = View.VISIBLE
+        back_chatBtn.visibility = View.GONE
+        back_main_notice.visibility=View.GONE
+    }
+
 
 
     private fun getUniqueID(): String {
@@ -316,7 +379,7 @@ class ChatActivity : AppCompatActivity() {
         isPeerConnected = true
     }
 
-    override fun onBackPressed() {
+    override fun onBackPressed(){
         finish()
     }
 
@@ -330,27 +393,6 @@ class ChatActivity : AppCompatActivity() {
 
     }
 
-    private val childEventListener = object : ChildEventListener {
-        override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-            Log.e("Listeners", "ChildEventListener-onChildAdded : ${snapshot.value}",)
-        }
-
-        override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {}
-
-        override fun onChildRemoved(snapshot: DataSnapshot) {
-            if(snapshot.child("connId").value.toString().equals(anotherUID)){
-                Toast.makeText(getApplicationContext(), "상대방이 나갔습니", Toast.LENGTH_SHORT).show();
-                Log.d(TAG,snapshot.child("connId").value.toString())
-            }
-
-        }
-
-
-        override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {}
-
-        override fun onCancelled(error: DatabaseError) {}
-
-    }
 
     private fun askPermissions() {
         ActivityCompat.requestPermissions(this, permissions, requestcode)

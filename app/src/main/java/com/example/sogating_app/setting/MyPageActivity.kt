@@ -1,12 +1,15 @@
 package com.example.sogating_app.setting
 
 import android.Manifest
+import android.app.Dialog
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
-import android.location.Address
+import android.graphics.drawable.ColorDrawable
 import android.location.Geocoder
 import android.location.Location
 import android.os.Build
@@ -20,8 +23,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.Nullable
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.bumptech.glide.Glide
@@ -29,8 +30,6 @@ import com.example.sogating_app.MAIN.MainActivity
 import com.example.sogating_app.Message.img.ImgApi
 import com.example.sogating_app.Message.img.ResponseData
 import com.example.sogating_app.R
-import com.example.sogating_app.audio.MultiVoiceActivity
-import com.example.sogating_app.audio.VoiceChatActivity
 import com.example.sogating_app.auth.IntroActivity
 import com.example.sogating_app.auth.UserDataModel
 import com.example.sogating_app.utils.FirebaseAuthUtils
@@ -80,6 +79,7 @@ class MyPageActivity : AppCompatActivity() {
     private val REQUEST_PERMISSION_LOCATION = 10
     lateinit var mylocation: LatLng
     lateinit var addr: String
+    lateinit var pro : ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -137,6 +137,7 @@ class MyPageActivity : AppCompatActivity() {
 
         // 이미지 변경버튼
         changebtn.setOnClickListener {
+
             scanImg()
 //            uploadImage(uid)
 //            Toast.makeText(this, "변경이 완료 되었습니다", Toast.LENGTH_SHORT).show()
@@ -260,7 +261,7 @@ class MyPageActivity : AppCompatActivity() {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos)
         val data = baos.toByteArray()
         val imageString: String = Base64.encodeToString(data, Base64.DEFAULT)
-
+        pro = ProgressDialog.show(this, "얼굴인식중입니다","")
 
         //retrofit를 이용하여 flask_server로 byteArray를 전송
         val api = ImgApi.create();
@@ -275,6 +276,7 @@ class MyPageActivity : AppCompatActivity() {
                 if (body.toString().indexOf('1') != -1){
                     uploadImage(uid)
                     var cel_name = body.substring(34,body.lastIndex)
+                    pro.dismiss()
                     Toast.makeText(getApplicationContext(), "얼굴인식 완료, 이미지 변경이 완료 되었습니다.",Toast.LENGTH_SHORT).show();
                     Toast.makeText(getApplicationContext(), "당신의 닮은꼴 연예인은 " + cel_name + "입니다",Toast.LENGTH_SHORT).show();
                     val myFace = findViewById<TextView>(R.id.myFace)
@@ -282,9 +284,11 @@ class MyPageActivity : AppCompatActivity() {
                     FirebaseRef.userInfoRef.child(uid).child("face").setValue(myFace.text)
 
                 }else if(body.toString().indexOf('2') != -1){
+                    pro.dismiss()
                     Toast.makeText(getApplicationContext(), "얼굴인식 실패 혼자만 있는 사진을 선택해 주세요",Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    pro.dismiss()
                     Toast.makeText(getApplicationContext(), "얼굴인식 실패 다른 사진을 선택해 주세요",Toast.LENGTH_SHORT).show();
                 }
 
@@ -292,6 +296,7 @@ class MyPageActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<ResponseData>, t: Throwable) {
                 Log.d("log", "fail")
+                pro.dismiss()
                 Toast.makeText(getApplicationContext(), "서버가 불안정 합니다", Toast.LENGTH_SHORT).show();
 
             }
@@ -471,4 +476,6 @@ class MyPageActivity : AppCompatActivity() {
             }
         }
     }
+
+
 }
