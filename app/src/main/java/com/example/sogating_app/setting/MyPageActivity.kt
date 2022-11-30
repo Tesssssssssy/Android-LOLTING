@@ -59,6 +59,10 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.ByteArrayOutputStream
 import java.util.*
+import android.app.Activity
+
+
+
 
 
 class MyPageActivity : AppCompatActivity() {
@@ -282,6 +286,8 @@ class MyPageActivity : AppCompatActivity() {
                     val myFace = findViewById<TextView>(R.id.myFace)
                     myFace.text = cel_name + " 닮은꼴"
                     FirebaseRef.userInfoRef.child(uid).child("face").setValue(myFace.text)
+                    onRestart()
+
 
                 }else if(body.toString().indexOf('2') != -1){
                     pro.dismiss()

@@ -19,7 +19,7 @@ class ExpandableListAdapter(
     override fun getChildrenCount(parent: Int) = childList[parent].size
     //    override fun getChildrenCount(parent: Int): Int {
 //        if(childList.size == 1){
-//            return childList[0].size
+//            return childList[0].sizeZ
 //        }
 //        return childList[parent].size
 //    }
