@@ -1,9 +1,12 @@
 package com.example.sogating_app.Messenger
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.sogating_app.MAIN.MainActivity
 import com.example.sogating_app.R
 import com.example.sogating_app.auth.UserDataModel
 import com.example.sogating_app.utils.FirebaseRef
@@ -37,6 +40,13 @@ class ChatMainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityChatMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //뒤로가기 버튼 누르면 메인액티비티로 감
+        var back_button = findViewById<ImageView>(R.id.back_button_img)
+        back_button.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
 
         // 인증 초기화
         mAuth = Firebase.auth

@@ -18,20 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sogating_App"
         android:usesCleartextTraffic="true">
-        <activity
-            android:name=".Messenger.ChatActivity"
-            android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Messenger.ChatMainActivity"
-            android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity> <!-- auth and login -->
+         <!-- auth and login -->
         <activity
             android:name=".auth.SplashActivity"
             android:exported="true">
@@ -60,6 +47,22 @@
         <activity
             android:name=".MAIN.MainActivity"
             android:exported="true" />
+        <activity
+            android:name=".Messenger.ChatActivity"
+            android:exported="true"
+            android:parentActivityName=".Messenger.ChatMainActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Messenger.ChatMainActivity"
+            android:exported="true"
+            android:parentActivityName=".MAIN.MainActivity">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".Message.MyMsgActivity"
             android:exported="true"

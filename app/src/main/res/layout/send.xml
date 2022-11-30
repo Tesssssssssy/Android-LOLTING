@@ -9,9 +9,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_margin = "5dp"
-        android:background = "@drawable/btn_background"
+        android:background = "@drawable/backgradientpurple2"
         android:padding="10dp"
         android:text="받는 메시지"
+        android:fontFamily="@font/jalnan"
+        android:textStyle="bold"
         android:textColor="@android:color/white"
         android:textSize="18sp"/>
 

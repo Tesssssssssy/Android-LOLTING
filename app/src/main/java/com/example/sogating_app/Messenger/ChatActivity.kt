@@ -14,12 +14,14 @@ import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import android.widget.Toast.LENGTH_LONG
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.sogating_app.MAIN.MainActivity
 import com.example.sogating_app.R
 import com.example.sogating_app.audio.*
 import com.example.sogating_app.utils.FirebaseRef
@@ -33,6 +35,7 @@ import com.google.firebase.storage.ktx.storage
 import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.activity_call.*
 import kotlinx.android.synthetic.main.activity_chat.*
+import kotlinx.android.synthetic.main.appbar.*
 import java.util.*
 import kotlin.collections.ArrayList
 import android.content.Context
@@ -78,6 +81,13 @@ class ChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //뒤로가기 버튼 누르면 메인액티비티로 감
+        var back_button = findViewById<ImageView>(R.id.back_button_img)
+        back_button.setOnClickListener {
+            val intent = Intent(this, ChatMainActivity::class.java)
+            startActivity(intent)
+        }
 
 
         // 대기 다이얼로그 초기화
@@ -328,7 +338,7 @@ class ChatActivity : AppCompatActivity() {
         if (caller == null){
             return
         }
-        toolbar.visibility = View.GONE
+        chattoolbar.visibility = View.GONE
         callLayout.visibility = View.VISIBLE
 
         incomingCallTxt.text = "$caller is calling..."
