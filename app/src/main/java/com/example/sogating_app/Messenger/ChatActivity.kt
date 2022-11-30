@@ -19,18 +19,24 @@ import android.widget.Toast.LENGTH_LONG
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.sogating_app.R
 import com.example.sogating_app.audio.*
 import com.example.sogating_app.utils.FirebaseRef
 import com.example.sogating_app.databinding.ActivityChatBinding
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.ktx.initialize
+import com.google.firebase.storage.ktx.storage
+import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.activity_call.*
 import kotlinx.android.synthetic.main.activity_chat.*
 import java.util.*
 import kotlin.collections.ArrayList
+import android.content.Context
+
 // 음성채팅 변수 초기화
 
 
@@ -352,6 +358,31 @@ class ChatActivity : AppCompatActivity() {
         callControlLayout.visibility = View.VISIBLE
         chat_recyclerView.visibility = View.GONE
 
+        // Firebase에 저장된 나의 이미지를 가져온다.
+        val storageRefmy = Firebase.storage.reference.child(myUID + ".png")
+
+        storageRefmy.downloadUrl.addOnCompleteListener(OnCompleteListener { task->
+            if(task.isSuccessful){
+                Glide.with(baseContext)
+                    .load(task.result)
+                    .into(userImgMy);
+            }
+
+        })
+
+        // Firebase에 저장된 상대방의 이미지를 가져온다.
+        val storageRefan = Firebase.storage.reference.child(anotherUID + ".png")
+
+        storageRefan.downloadUrl.addOnCompleteListener(OnCompleteListener { task->
+            if(task.isSuccessful){
+                Glide.with(baseContext)
+                    .load(task.result)
+                    .into(userImgAnother);
+            }
+
+        })
+
+        userImg.visibility = View.VISIBLE
     }
 
     //UI 제어(채팅 상태)
@@ -362,6 +393,7 @@ class ChatActivity : AppCompatActivity() {
         chat_recyclerView.visibility = View.VISIBLE
         back_chatBtn.visibility = View.GONE
         back_main_notice.visibility=View.GONE
+        userImg.visibility = View.GONE
     }
 
 

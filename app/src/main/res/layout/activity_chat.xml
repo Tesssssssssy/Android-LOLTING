@@ -13,6 +13,32 @@
         android:visibility="gone"
         android:id="@+id/webView"/>
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:weightSum="2"
+        android:id="@+id/userImg"
+        android:visibility="gone"
+        android:layout_marginTop="52dp">
+
+        <ImageView
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:id="@+id/userImgMy">
+        </ImageView>
+
+        <ImageView
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:id="@+id/userImgAnother">
+
+        </ImageView>
+
+    </LinearLayout>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
