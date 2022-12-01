@@ -26,7 +26,7 @@ class PartnerActivity : AppCompatActivity() {
         //친구와 함께 버튼 클릭
         var friendbtn = findViewById<Button>(R.id.friendbtn)
         friendbtn.setOnClickListener{
-            Toast.makeText(this, "동성 친구와 매칭 됩니다!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "동성 친구도 매칭 됩니다!", Toast.LENGTH_SHORT).show()
         }
 
         //이성과 함께 버튼 클릭

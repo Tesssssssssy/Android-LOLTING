@@ -65,7 +65,7 @@ class CardStackAdapter(val context: Context, val items: MutableList<UserDataMode
             })
             face.text = data.face
             nickname.text = data.nickname
-            age.text = data.age
+            age.text = data.age + "세"
             city.text = data.city
             lolnickname.text = data.lolname
             lolposition.text = data.position
