@@ -142,7 +142,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     /* ExpandableListView 설정 */
     private fun setExpandableList() {
-        val parentList = mutableListOf("내정보","매칭하러가기","좋아요한 친구 목록","매칭된 친구 목록", "메시지함")
+        val parentList = mutableListOf("내 정보","매칭하기","좋아요한 친구 목록","매칭된 친구와 대화하기", "쪽지함")
         val childList = mutableListOf(
             mutableListOf("내정보","원하는 상대 정보"),
             mutableListOf(),

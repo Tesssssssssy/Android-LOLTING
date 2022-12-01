@@ -123,7 +123,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:fontFamily="@font/jalnan"
-                android:text="주소 변경"
+                android:text="현재 나의 위치 찾기"
                 android:background = "@drawable/backgradientpurple"
                 android:textColor="@color/white"
                 android:textSize="20sp"
