@@ -60,9 +60,9 @@ import retrofit2.Response
 import java.io.ByteArrayOutputStream
 import java.util.*
 import android.app.Activity
-
-
-
+import android.net.Uri
+import java.net.URI
+import kotlin.reflect.typeOf
 
 
 class MyPageActivity : AppCompatActivity() {
@@ -84,6 +84,8 @@ class MyPageActivity : AppCompatActivity() {
     lateinit var mylocation: LatLng
     lateinit var addr: String
     lateinit var pro : ProgressDialog
+    lateinit var user_img_uri : Uri
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -125,6 +127,7 @@ class MyPageActivity : AppCompatActivity() {
             ActivityResultContracts.GetContent(),
             ActivityResultCallback { uri ->
                 myImage.setImageURI(uri)
+                user_img_uri = uri
             }
         )
 
@@ -286,7 +289,16 @@ class MyPageActivity : AppCompatActivity() {
                     val myFace = findViewById<TextView>(R.id.myFace)
                     myFace.text = cel_name + " 닮은꼴"
                     FirebaseRef.userInfoRef.child(uid).child("face").setValue(myFace.text)
-                    onRestart()
+                    myImage.setImageURI(user_img_uri)
+
+//                    val storageRef = Firebase.storage.reference.child(uid + ".png")
+//                    storageRef.downloadUrl.addOnCompleteListener(OnCompleteListener { task ->
+//                        if (task.isSuccessful) {
+//                            Glide.with(baseContext)
+//                                .load(task.result)
+//                                .into(myImage)
+//                        }
+//                    })
 
 
                 }else if(body.toString().indexOf('2') != -1){
