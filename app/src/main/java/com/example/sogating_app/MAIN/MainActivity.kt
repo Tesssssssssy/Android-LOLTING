@@ -147,6 +147,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             mutableListOf("내정보","원하는 상대 정보"),
             mutableListOf(),
             mutableListOf(),
+            mutableListOf(),
             mutableListOf()
         )
 

@@ -55,6 +55,7 @@ class ChatActivity : AppCompatActivity() {
     var isAudio = true
     var isVideo = true
     var check_out = 0
+    var check_out_2 = 0
 
     val permissions = arrayOf(Manifest.permission.RECORD_AUDIO)
     val requestcode = 1
@@ -140,8 +141,22 @@ class ChatActivity : AppCompatActivity() {
 
             anotherUID = receiverUid
             check_out = 1
+            check_out_2 = 1
             pro = ProgressDialog.show(this, "통화 대기중 입니다.", "")
             sendCallRequest()
+
+        }
+
+        //음성 통화 -> 채팅방 버튼
+        back_chatBtn.setOnClickListener {
+
+            switchToControls_back()
+            if (check_out == 1) {
+                myUID = anotherUID
+            }
+            firebaseRef.child(myUID).setValue(null)
+            webView.loadUrl("about:blank")
+            back_chatBtn.visibility = View.GONE
 
         }
 
@@ -239,7 +254,6 @@ class ChatActivity : AppCompatActivity() {
                 callJavascriptFunction("javascript:startCall(\"${snapshot.value}\")")
                 check_out = 2
             }
-
         })
     }
 
@@ -301,13 +315,13 @@ class ChatActivity : AppCompatActivity() {
                     Log.d(TAG,"상대가 거절 했습니다.")
                     pro.dismiss()
                     Toast.makeText(this@ChatActivity, "상대가 거절 했습니다.",Toast.LENGTH_SHORT).show();
-
+                    toolbar.visibility = View.VISIBLE
                     check_out = 0
                 }
             }
         })
 
-        //상대가 통화가 종료 됬을 때 실행
+        //상대가 통화가 종료 됬을 때 실행(통화 걸기)
         firebaseRef.child(anotherUID).child("connId").addValueEventListener(object :
             ValueEventListener {
             override fun onCancelled(error: DatabaseError) {}
@@ -315,19 +329,27 @@ class ChatActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.value == null && initCheck !=0 && check_out == 2) {
                     Log.d(TAG,"상대가 통화를 종료 했습니다.")
-                    pro.dismiss()
                     back_main_notice.visibility = View.VISIBLE
                     back_chatBtn.visibility= View.VISIBLE
                     check_out = 0
-                    back_chatBtn.setOnClickListener {
 
-                        switchToControls_back()
-                        if (check_out == 1) {
-                            myUID = anotherUID
-                        }
-                        firebaseRef.child(myUID).setValue(null)
-                        webView.loadUrl("about:blank")
-                    }
+                }
+            }
+        })
+
+
+        //상대가 통화가 종료 됬을 때 실행(통화 받기)
+        firebaseRef.child(myUID).child("connId").addValueEventListener(object :
+            ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {}
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.value == null && initCheck !=0 && check_out == 2) {
+                    Log.d(TAG,"상대가 통화를 종료 했습니다.")
+                    back_main_notice.visibility = View.VISIBLE
+                    back_chatBtn.visibility= View.VISIBLE
+                    check_out = 0
+
                 }
             }
         })
@@ -357,16 +379,16 @@ class ChatActivity : AppCompatActivity() {
             firebaseRef.child(myUID).child("incoming").setValue(null)
             callLayout.visibility = View.GONE
             toolbar.visibility = View.VISIBLE
-
+            chattoolbar.visibility = View.VISIBLE
         }
-
     }
     //UI 제어(통화 상태)
     private fun switchToControls() {
-        toolbar.visibility = View.GONE
         input_layout.visibility=View.GONE
         callControlLayout.visibility = View.VISIBLE
         chat_recyclerView.visibility = View.GONE
+        chattoolbar.visibility = View.GONE
+
 
         // Firebase에 저장된 나의 이미지를 가져온다.
         val storageRefmy = Firebase.storage.reference.child(myUID + ".png")
@@ -401,9 +423,12 @@ class ChatActivity : AppCompatActivity() {
         input_layout.visibility=View.VISIBLE
         callControlLayout.visibility = View.GONE
         chat_recyclerView.visibility = View.VISIBLE
-        back_chatBtn.visibility = View.GONE
         back_main_notice.visibility=View.GONE
         userImg.visibility = View.GONE
+        chattoolbar.visibility  = View.VISIBLE
+
+
+
     }
 
 
@@ -422,11 +447,16 @@ class ChatActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed(){
+        Log.d(TAG,"MY STATUS :" +check_out)
+        if (check_out == 1 || check_out_2 == 1) {
+            myUID = anotherUID
+        }
+        firebaseRef.child(myUID).setValue(null)
         finish()
     }
 
     override fun onDestroy() {
-        if (check_out == 1) {
+        if (check_out == 1 || check_out_2 == 1) {
             myUID = anotherUID
         }
         firebaseRef.child(myUID).setValue(null)
