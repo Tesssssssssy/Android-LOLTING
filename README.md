@@ -30,7 +30,10 @@ https://www.notion.so/OB-c0f6a99b583f45e987eaa139bf335a3a
 https://www.figma.com/file/ty67GyxHRzVR6N82qeaW6J/%EC%82%B0%ED%95%99%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%A9%94%EC%9D%B8?node-id=0%3A1  
 
 ### 프로토 타입 이미지 
-<img src = "https://user-images.githubusercontent.com/63548551/194869131-9ddf3341-3dad-4cb2-bdc8-9b766cfc73b2.png" width="50%" height="50%">
+<img src = "https://github.com/byundonghwan/LOL_TING_FRONT_END/blob/master/app/src/main/res/drawable/lolting_main_capture.png" width="50%" height="50%">
+<img src = "https://github.com/byundonghwan/LOL_TING_FRONT_END/blob/master/app/src/main/res/drawable/matching.png" width="50%" height="50%">
+<img src = "https://github.com/byundonghwan/LOL_TING_FRONT_END/blob/master/app/src/main/res/drawable/chat.png" width="50%" height="50%">
+
 
 
 
