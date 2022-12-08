@@ -8,6 +8,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sogating_app.MAIN.MainActivity
 import com.example.sogating_app.R
+import com.example.sogating_app.audio.TAG
 import com.example.sogating_app.auth.UserDataModel
 import com.example.sogating_app.utils.FirebaseRef
 import com.example.sogating_app.databinding.ActivityChatMainBinding
@@ -70,11 +71,12 @@ class ChatMainActivity : AppCompatActivity() {
         binding.userRecyclerview.adapter = adapter
 
 
-        // 내가 좋아하는 유저 정보 가져오기
+        // 내가 좋아하는 유저 정보 가져오기 및 나를 좋아하는 유저 정보 가져오기
         FirebaseRef.userLikeRef.addValueEventListener(object :ValueEventListener{
 
             override fun onDataChange(snapshot: DataSnapshot) {
 
+                //내가 좋아 하는 사람들
                 for(postSnapshot in snapshot.children){
                     if(postSnapshot.key.equals(mAuth.currentUser?.uid.toString())) {
                         for (subPostSnapshot in postSnapshot.children) {
@@ -83,13 +85,19 @@ class ChatMainActivity : AppCompatActivity() {
                     }
                 }
 
+                //내가 좋아 하는 사람이 좋아 하는 유저 리스트에 나의 UID가 있는 지 판단
                 for(postSnapshot in snapshot.children){
                     for(subPostSnapshot in postSnapshot.children){
-                        if(iLikeUser.contains(subPostSnapshot.key.toString())){
-                            matchUser.add(subPostSnapshot.key.toString())
+                        if(iLikeUser.contains(postSnapshot.key.toString())){
+                            if(mAuth.currentUser?.uid.toString().equals(subPostSnapshot.key.toString())){
+                                Log.d("you like me user", postSnapshot.key.toString())
+                                matchUser.add(postSnapshot.key.toString())
+                            }
                         }
                     }
                 }
+
+
                 Log.d("i like user", iLikeUser.toString())
             }
 
@@ -110,6 +118,7 @@ class ChatMainActivity : AppCompatActivity() {
                     val currentUser = postSnapshot.getValue(UserDataModel::class.java) // 유저 정보
 
                     if (matchUser.contains(currentUser?.uid.toString())){
+                        Log.d(TAG,"in matchUserSet")
                         //mAuth 객체를 통해서 현재 로그인한 나의 정보를 알 수 있다.
                         // 나의 uid와 등록된 사용자 uid 정보가 다를 때만 userList에 추가한다.
                         userList.add(currentUser!!)

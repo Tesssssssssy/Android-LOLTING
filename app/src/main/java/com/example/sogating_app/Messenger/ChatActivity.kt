@@ -367,6 +367,9 @@ class ChatActivity : AppCompatActivity() {
         Log.d(TAG,"onCallRequestIn")
 
         acceptBtn.setOnClickListener {
+            if (!isPermissonGranted()) {
+                askPermissions()
+            }
             firebaseRef.child(myUID).child("connId").setValue(uniqueId)
             firebaseRef.child(myUID).child("isAvailable").setValue(true)
 
@@ -389,19 +392,6 @@ class ChatActivity : AppCompatActivity() {
         chat_recyclerView.visibility = View.GONE
         chattoolbar.visibility = View.GONE
 
-
-        // Firebase에 저장된 나의 이미지를 가져온다.
-        val storageRefmy = Firebase.storage.reference.child(myUID + ".png")
-
-        storageRefmy.downloadUrl.addOnCompleteListener(OnCompleteListener { task->
-            if(task.isSuccessful){
-                Glide.with(baseContext)
-                    .load(task.result)
-                    .into(userImgMy);
-            }
-
-        })
-
         // Firebase에 저장된 상대방의 이미지를 가져온다.
         val storageRefan = Firebase.storage.reference.child(anotherUID + ".png")
 
@@ -415,6 +405,7 @@ class ChatActivity : AppCompatActivity() {
         })
 
         userImg.visibility = View.VISIBLE
+
     }
 
     //UI 제어(채팅 상태)

@@ -84,12 +84,12 @@ class MyPageActivity : AppCompatActivity() {
     lateinit var mylocation: LatLng
     lateinit var addr: String
     lateinit var pro : ProgressDialog
-    lateinit var user_img_uri : Uri
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_page)
+        auth = Firebase.auth
 
         //뒤로가기 버튼 누르면 메인액티비티로 감
         var back_button = findViewById<ImageView>(R.id.back_button_img)
@@ -127,7 +127,6 @@ class MyPageActivity : AppCompatActivity() {
             ActivityResultContracts.GetContent(),
             ActivityResultCallback { uri ->
                 myImage.setImageURI(uri)
-                user_img_uri = uri
             }
         )
 
@@ -240,7 +239,6 @@ class MyPageActivity : AppCompatActivity() {
         // Firebase 저장되는 경로 지정.
         val storage = Firebase.storage
         val storageRef = storage.reference.child(uid + ".png")
-
         // Get the data from an ImageView as bytes
         myImage.isDrawingCacheEnabled = true
         myImage.buildDrawingCache()
@@ -253,7 +251,8 @@ class MyPageActivity : AppCompatActivity() {
         uploadTask.addOnFailureListener {
             // Handle unsuccessful uploads
         }.addOnSuccessListener { taskSnapshot ->
-            // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
+            getMyData()
+        // taskSnapshot.metadata contains file metadata such as size, content-type, etc.
             // ...
         }
     }
@@ -263,6 +262,7 @@ class MyPageActivity : AppCompatActivity() {
         //img를 byteArray로 변환
         myImage.isDrawingCacheEnabled = true
         myImage.buildDrawingCache()
+
         val bitmap = (myImage.drawable as BitmapDrawable).bitmap
         val baos = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 40, baos)
@@ -289,16 +289,8 @@ class MyPageActivity : AppCompatActivity() {
                     val myFace = findViewById<TextView>(R.id.myFace)
                     myFace.text = cel_name + " 닮은꼴"
                     FirebaseRef.userInfoRef.child(uid).child("face").setValue(myFace.text)
-                    myImage.setImageURI(user_img_uri)
 
-//                    val storageRef = Firebase.storage.reference.child(uid + ".png")
-//                    storageRef.downloadUrl.addOnCompleteListener(OnCompleteListener { task ->
-//                        if (task.isSuccessful) {
-//                            Glide.with(baseContext)
-//                                .load(task.result)
-//                                .into(myImage)
-//                        }
-//                    })
+//
 
 
                 }else if(body.toString().indexOf('2') != -1){
