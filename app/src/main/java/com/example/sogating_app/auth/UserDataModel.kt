@@ -15,5 +15,9 @@ data class UserDataModel(
     // 롤 데이터
     val lolname : String? = null,
     val loltier : String? = null,
+
+    //매칭 데이터
+    val match : Int? = null, // 0 이성매칭, 1 친구매칭
+    val wantposition : String? = null
 )
 

@@ -8,16 +8,13 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.sogating_app.R
 import com.example.sogating_app.auth.UserDataModel
-import com.example.sogating_app.setting.MyPageActivity
 import com.example.sogating_app.slider.CardStackAdapter
 import com.example.sogating_app.utils.FirebaseAuthUtils
 import com.example.sogating_app.utils.FirebaseRef
@@ -29,6 +26,7 @@ import com.yuyakaido.android.cardstackview.CardStackLayoutManager
 import com.yuyakaido.android.cardstackview.CardStackListener
 import com.yuyakaido.android.cardstackview.CardStackView
 import com.yuyakaido.android.cardstackview.Direction
+import kotlin.math.abs
 
 class
 MatchingActivity : AppCompatActivity() {
@@ -44,9 +42,8 @@ MatchingActivity : AppCompatActivity() {
     private var userCount = 0
 
     private lateinit var currentUserGender : String
-    private lateinit var currentUserLOLnickname: String
     private lateinit var currentUserLOLtier: String
-    private lateinit var currentUserAGE: String
+    private lateinit var currentUserLOLposition: String
 
     private val uid = FirebaseAuthUtils.getUid()
 
@@ -139,11 +136,9 @@ MatchingActivity : AppCompatActivity() {
                 Log.w(TAG, dataSnapshot.toString())
                 val data = dataSnapshot.getValue(UserDataModel::class.java)
 
-
                 currentUserGender = data?.gender.toString()
-                currentUserAGE = data?.age.toString()
-                currentUserLOLnickname = data?.lolname.toString()
                 currentUserLOLtier = data?.loltier.toString()
+                currentUserLOLposition = data?.position.toString()
 
                 MyInfo.myNickName = data?.nickname.toString()
                 getUserDataList(currentUserGender)
@@ -161,32 +156,79 @@ MatchingActivity : AppCompatActivity() {
 
     // 회원 정보를 가져오는 함수.
     private fun getUserDataList(currentUserGender : String){
+        var mytierpoint : Int = 0
+        var currentusertierpoint : Int = 0
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
                 //val post = dataSnapshot.getValue<Post>()
 
-                for (dataModel in dataSnapshot.children){
+                for (dataModel in dataSnapshot.children) {
 
                     val user = dataModel.getValue(UserDataModel::class.java)
 
-                    // 매칭 알고리즘!
-                    //1. 나와 다른 성별 남 -> 여, 여 -> 남
-                    //2. firebase realtime database 내에서 lolname 이 "롤닉네임" 이 아니어야 함 즉 롤닉네임이 등록 되어 있어야함
-                    //3. 나이 +- 10살 (추후 변경 예정)
-                    //4. 티어 차이 +- 1티어 브론즈라면 브론즈, 실버, 골드 만 매칭 (추후 구현 예정)
-                    if(user!!.gender.toString().equals(currentUserGender) || user!!.lolname == "롤닉네임" ){
+                    /* 매칭 알고리즘!
+                    * match == 0 : 이성매칭
+                    * match == 1 : 모든 성별 매칭
+                    *
+                    * wantposition = "탑"
+                    * wantposition = "정글"
+                    * wantposition = "미드"
+                    * wantposition = "원딜"
+                    * wantposition = "서폿"
+                    *
+                    * loltier = "UNRANKED"      0점
+                    * loltier = "IRON"          1점
+                    * loltier = "BRONZE"        2점
+                    * loltier = "SILVER"        3점
+                    * loltier = "GOLD"          4점
+                    * loltier = "PLATINUM"      5점
+                    * loltier = "DIAMOND"       6점
+                    * loltier = "MASTER"        7점
+                    * loltier = "GRANDMASTER"   8점
+                    * loltier = "CHALLENGER"    9점
+                    *
+                    * 티어간 점수차 2점 미만으로 나야지만 매칭!
+                    */
 
-                    }else{
-                        usersDataList.add(user!!) // 유저의 정보 리스트에 추가.
+                    when (user!!.loltier) {
+                        "UNRANKED" -> mytierpoint = 0
+                        "IRON" -> mytierpoint = 1
+                        "BRONZE" -> mytierpoint = 2
+                        "SILVER" -> mytierpoint = 3
+                        "GOLD" -> mytierpoint = 4
+                        "PLATINUM" -> mytierpoint = 5
+                        "DIAMOND" -> mytierpoint = 6
+                        "MASTER" -> mytierpoint = 7
+                        "GRANDMASTER" -> mytierpoint = 8
+                        "CHALLENGER" -> mytierpoint = 9
+                        else -> 10
                     }
 
+                    when (currentUserLOLtier) {
+                        "UNRANKED" -> currentusertierpoint = 0
+                        "IRON" -> currentusertierpoint = 1
+                        "BRONZE" -> currentusertierpoint = 2
+                        "SILVER" -> currentusertierpoint = 3
+                        "GOLD" -> currentusertierpoint = 4
+                        "PLATINUM" -> currentusertierpoint = 5
+                        "DIAMOND" -> currentusertierpoint = 6
+                        "MASTER" -> currentusertierpoint = 7
+                        "GRANDMASTER" -> currentusertierpoint = 8
+                        "CHALLENGER" -> currentusertierpoint = 9
+                        else -> 10
+                    }
 
+                    val pointdiff: Int = abs(mytierpoint - currentusertierpoint)
 
+                    if (user!!.wantposition == currentUserLOLposition && pointdiff <= 2 && user!!.lolname != "롤닉네임") {
+                        if (user!!.match == 0 && user!!.gender != currentUserGender) {
+                            usersDataList.add(user!!)
+                        }
+                    }
+                    cardStackAdapter.notifyDataSetChanged() // 현재 회원가입된 유저의 정보로 카드스택어뎁터 동기화.
                 }
-                cardStackAdapter.notifyDataSetChanged() // 현재 회원가입된 유저의 정보로 카드스택어뎁터 동기화.
             }
-
             override fun onCancelled(databaseError: DatabaseError) {
                 // Getting Post failed, log a message
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException())

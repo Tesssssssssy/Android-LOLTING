@@ -39,7 +39,7 @@ class JoinActivity : AppCompatActivity() {
     private var gender = ""
     private var age = ""
     private var uid = ""
-    private var position = ""
+//    private var position = ""
 
 //    lateinit var profileImage: ImageView
 
@@ -97,7 +97,7 @@ class JoinActivity : AppCompatActivity() {
             }
             //나이, 롤포지션 저장
             age = findViewById<TextInputEditText>(R.id.ageArea).text.toString()
-            position = findViewById<TextInputEditText>(R.id.gamepositionArea).text.toString()
+//            position = findViewById<TextInputEditText>(R.id.gamepositionArea).text.toString()
 
 
             // 회원가입시 Firebase에 유저의 정보들을 저장한다. -  회원가입 기능 구현.
@@ -135,12 +135,14 @@ class JoinActivity : AppCompatActivity() {
                                     nickname,
                                     age,
                                     gender,
-                                    position,
+                                    "포지션",
                                     token,
                                     "내얼굴",
                                     "사는곳",
                                     "롤닉네임",
-                                    "롤티어"
+                                    "롤티어",
+                                    0,
+                                    "포지션"
                                 )
 
 

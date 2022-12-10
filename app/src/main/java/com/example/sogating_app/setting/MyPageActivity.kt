@@ -67,7 +67,7 @@ import kotlin.reflect.typeOf
 
 class MyPageActivity : AppCompatActivity() {
     //키 24시간 마다 초기화!
-    val RIOTKEY = "RGAPI-e3dc6800-d4b1-4e2b-8907-4000b24717d0"
+    val RIOTKEY = "RGAPI-8977c651-22c1-4b5f-b859-8719e6d5f8a7"
 
     private val TAG = "MyPageActivity::class.java"
     private lateinit var auth: FirebaseAuth
@@ -150,6 +150,33 @@ class MyPageActivity : AppCompatActivity() {
         }
 
         /* 롤 아이디 등록 및 티어체크 버튼 */
+
+        /* 롤 포지션 정하기 */
+        btn1.setOnClickListener{
+            myLOLPostion.text = "탑"
+            Toast.makeText(this, "당신의 포지션은 탑 입니다", Toast.LENGTH_SHORT).show()
+            FirebaseRef.userInfoRef.child(uid).child("position").setValue(myLOLPostion.text)
+        }
+        btn2.setOnClickListener{
+            myLOLPostion.text = "정글"
+            Toast.makeText(this, "당신의 포지션은 정글 입니다", Toast.LENGTH_SHORT).show()
+            FirebaseRef.userInfoRef.child(uid).child("position").setValue(myLOLPostion.text)
+        }
+        btn3.setOnClickListener{
+            myLOLPostion.text = "미드"
+            Toast.makeText(this, "당신의 포지션은 미드 입니다", Toast.LENGTH_SHORT).show()
+            FirebaseRef.userInfoRef.child(uid).child("position").setValue(myLOLPostion.text)
+        }
+        btn4.setOnClickListener{
+            myLOLPostion.text = "원딜"
+            Toast.makeText(this, "당신의 포지션은 원딜 입니다", Toast.LENGTH_SHORT).show()
+            FirebaseRef.userInfoRef.child(uid).child("position").setValue(myLOLPostion.text)
+        }
+        btn5.setOnClickListener{
+            myLOLPostion.text = "서폿"
+            Toast.makeText(this, "당신의 포지션은 서폿 입니다", Toast.LENGTH_SHORT).show()
+            FirebaseRef.userInfoRef.child(uid).child("position").setValue(myLOLPostion.text)
+        }
 
         /* RIOT API setting */
         //임시 api key setting 24시간마다 갱신해야됨!!!
