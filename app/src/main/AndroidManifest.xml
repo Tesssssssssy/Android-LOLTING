@@ -18,7 +18,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sogating_App"
         android:usesCleartextTraffic="true">
-         <!-- auth and login -->
+        <activity
+            android:name=".board.CommunityActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".board.BoardEditActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".board.BoardInsideActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".board.BoardWriteActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity> <!-- auth and login -->
         <activity
             android:name=".auth.SplashActivity"
             android:exported="true">
@@ -94,8 +121,8 @@
         <activity
             android:name=".audio.MultiVoiceActivity"
             android:exported="true"
-            android:stopWithTask="false"
-            android:parentActivityName=".MAIN.MainActivity" />
+            android:parentActivityName=".MAIN.MainActivity"
+            android:stopWithTask="false" />
         <activity
             android:name=".setting.SettingActivity"
             android:exported="true"

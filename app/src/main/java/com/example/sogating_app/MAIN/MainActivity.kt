@@ -16,6 +16,7 @@ import com.example.sogating_app.Message.MyLikeListActivity
 import com.example.sogating_app.Message.MyMsgActivity
 import com.example.sogating_app.R
 import com.example.sogating_app.auth.UserDataModel
+import com.example.sogating_app.board.CommunityActivity
 import com.example.sogating_app.setting.MyPageActivity
 import com.example.sogating_app.setting.PartnerActivity
 import com.example.sogating_app.utils.FirebaseAuthUtils
@@ -142,9 +143,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     /* ExpandableListView 설정 */
     private fun setExpandableList() {
-        val parentList = mutableListOf("내 정보","매칭하기","좋아요한 친구 목록","매칭된 친구와 대화하기", "쪽지함")
+        val parentList = mutableListOf("내 정보","매칭하기","좋아요한 친구 목록","매칭된 친구와 대화하기", "쪽지함", "커뮤니티")
         val childList = mutableListOf(
             mutableListOf("내정보","원하는 상대 정보"),
+            mutableListOf(),
             mutableListOf(),
             mutableListOf(),
             mutableListOf(),
@@ -177,6 +179,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 // 메시지함
                 4 -> {
                     val intent = Intent(this, MyMsgActivity::class.java)
+                    startActivity(intent)
+                }
+                // 커뮤니티
+                5 -> {
+                    val intent = Intent(this, CommunityActivity::class.java)
                     startActivity(intent)
                 }
                 
