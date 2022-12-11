@@ -150,7 +150,7 @@ MatchingActivity : AppCompatActivity() {
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
             }
         }
-        // 데이터가 어디에 정의되어 있는 냐?
+
         FirebaseRef.userInfoRef.child(uid).addValueEventListener(postListener)
     }
 
@@ -270,6 +270,7 @@ MatchingActivity : AppCompatActivity() {
                 Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
             }
         }
+
         // 좋아요한 친구의 uid 밑에 저장되있는 UID 값
         FirebaseRef.userLikeRef.child(otherUid).addValueEventListener(postListener)
     }
