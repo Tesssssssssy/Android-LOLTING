@@ -1,5 +1,6 @@
 package com.example.sogating_app.MAIN
 
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -44,6 +45,9 @@ MatchingActivity : AppCompatActivity() {
     private lateinit var currentUserGender : String
     private lateinit var currentUserLOLtier: String
     private lateinit var currentUserLOLposition: String
+    private lateinit var currentUserUid : String
+    private var currentUserMatch : Int = 0
+    private lateinit var currentUserWantposition : String
 
     private val uid = FirebaseAuthUtils.getUid()
 
@@ -136,9 +140,16 @@ MatchingActivity : AppCompatActivity() {
                 Log.w(TAG, dataSnapshot.toString())
                 val data = dataSnapshot.getValue(UserDataModel::class.java)
 
+                currentUserUid = data?.uid.toString()
                 currentUserGender = data?.gender.toString()
                 currentUserLOLtier = data?.loltier.toString()
                 currentUserLOLposition = data?.position.toString()
+
+                var buff = data?.match
+                if (buff != null) {
+                    currentUserMatch = buff.toInt()
+                }
+                currentUserWantposition = data?.wantposition.toString()
 
                 MyInfo.myNickName = data?.nickname.toString()
                 getUserDataList(currentUserGender)
@@ -159,6 +170,7 @@ MatchingActivity : AppCompatActivity() {
         var mytierpoint : Int = 0
         var currentusertierpoint : Int = 0
         val postListener = object : ValueEventListener {
+            @SuppressLint("NotifyDataSetChanged")
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
                 //val post = dataSnapshot.getValue<Post>()
@@ -216,15 +228,15 @@ MatchingActivity : AppCompatActivity() {
                         "MASTER" -> currentusertierpoint = 7
                         "GRANDMASTER" -> currentusertierpoint = 8
                         "CHALLENGER" -> currentusertierpoint = 9
-                        else -> 10
+                        else -> 20
                     }
 
                     val pointdiff: Int = abs(mytierpoint - currentusertierpoint)
 
-                    if (user!!.wantposition == currentUserLOLposition && pointdiff <= 2 && user!!.lolname != "롤닉네임") {
-                        if (user!!.match == 0 && user!!.gender != currentUserGender) {
-                            usersDataList.add(user!!)
-                        }
+                    if (user!!.uid != currentUserUid && currentUserMatch == 1 && currentUserWantposition == user!!.position && pointdiff <= 2 && user!!.lolname != "롤닉네임") {
+                        usersDataList.add(user!!)
+                    }else if ((currentUserMatch == 0) && (user!!.gender != currentUserGender) && (currentUserWantposition == user!!.position) && (pointdiff <= 2) && (user!!.lolname != "롤닉네임")) {
+                        usersDataList.add(user!!)
                     }
                     cardStackAdapter.notifyDataSetChanged() // 현재 회원가입된 유저의 정보로 카드스택어뎁터 동기화.
                 }
