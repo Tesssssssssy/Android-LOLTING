@@ -67,7 +67,7 @@ import kotlin.reflect.typeOf
 
 class MyPageActivity : AppCompatActivity() {
     //키 24시간 마다 초기화!
-    val RIOTKEY = "RGAPI-8977c651-22c1-4b5f-b859-8719e6d5f8a7"
+    val RIOTKEY = "RGAPI-98f19296-7f87-4e8b-8d4e-d606cc52f611"
 
     private val TAG = "MyPageActivity::class.java"
     private lateinit var auth: FirebaseAuth
