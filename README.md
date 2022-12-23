@@ -1,5 +1,4 @@
-# LOL_TING_FRONT-END
-## 프론트엔드 Repository  
+# LOL_TING Repository  
   
   
 ### 프론트엔드 개발 [안드로이드 Kotlin]
